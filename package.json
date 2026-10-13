@@ -11,6 +11,7 @@
   "private": true,
   "scripts": {
     "dev": "electron-vite dev",
+    "dev:watch": "electron-vite dev --watch --sourcemap --remoteDebuggingPort 9333",
     "build": "npm run typecheck && electron-vite build",
     "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
     "test": "vitest run",

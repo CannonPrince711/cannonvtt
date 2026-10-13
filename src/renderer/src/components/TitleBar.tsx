@@ -50,6 +50,11 @@ export function TitleBar(): React.JSX.Element {
         <span className="font-display text-[13px] font-semibold tracking-[0.12em] text-foreground">
           CANNON VTT
         </span>
+        {import.meta.env.DEV && (
+          <span className="rounded bg-crimson/80 px-1.5 py-0.5 text-[10px] font-bold tracking-wider text-white" title="Development build: reloads when the code changes">
+            DEV
+          </span>
+        )}
       </div>
 
       <span className="h-4 w-px bg-border" aria-hidden />

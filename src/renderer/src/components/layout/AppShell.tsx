@@ -1,119 +1,51 @@
-import { useEffect } from "react";
-import {
-  Group,
-  Panel,
-  Separator,
-  useDefaultLayout,
-  usePanelRef,
-  type PanelImperativeHandle,
-} from "react-resizable-panels";
-import { cn } from "@/lib/utils";
-import { useLayout } from "@/stores/layout";
-import { SceneStage } from "@/components/scene/SceneStage";
-import { FloatingWindows } from "@/components/windows/FloatingWindows";
-import { startSceneSync } from "@/stores/scene";
-import { LeftSidebar } from "./LeftSidebar";
-import { RightPanel } from "./RightPanel";
+import { useEffect } from 'react'
+import { Hotbar } from '@/components/hotbar/Hotbar'
+import { SceneStage } from '@/components/scene/SceneStage'
+import { FloatingWindows } from '@/components/windows/FloatingWindows'
+import { cn } from '@/lib/utils'
+import { useLayout } from '@/stores/layout'
+import { startSceneSync } from '@/stores/scene'
+import { PlayersList } from './PlayersList'
+import { RightPanel } from './RightPanel'
 
-/** Keeps a collapsible panel in sync with a boolean in the layout store. */
-function useCollapseSync(
-  ref: React.RefObject<PanelImperativeHandle | null>,
-  collapsed: boolean,
-): void {
-  useEffect(() => {
-    const panel = ref.current;
-    if (!panel) return;
-    if (collapsed && !panel.isCollapsed()) panel.collapse();
-    if (!collapsed && panel.isCollapsed()) panel.expand();
-  }, [ref, collapsed]);
-}
+/** Sidebar width when open, and as an icon column when collapsed. */
+const SIDEBAR_WIDTH = 380
+const SIDEBAR_COLLAPSED = 46
 
-function ResizeHandle(): React.JSX.Element {
-  return (
-    <Separator
-      className={cn(
-        "group relative w-px bg-border outline-none",
-        'after:absolute after:inset-y-0 after:-left-1 after:-right-1 after:content-[""]',
-        "data-[separator=active]:bg-primary data-[separator=hover]:bg-primary/60 focus-visible:bg-primary",
-      )}
-    />
-  );
-}
-
+/**
+ * Foundry-style layout: the scene fills the window and everything else
+ * floats over it: the sidebar on the right, players bottom-left, the macro
+ * hotbar along the bottom, and sheets in their own windows.
+ */
 export function AppShell(): React.JSX.Element {
-  const leftRef = usePanelRef();
-  const rightRef = usePanelRef();
-  const { leftCollapsed, rightCollapsed, setLeftCollapsed, setRightCollapsed } =
-    useLayout();
-  const layout = useDefaultLayout({ id: "vtt-layout", storage: safeStorage() });
-
-  useCollapseSync(leftRef, leftCollapsed);
-  useCollapseSync(rightRef, rightCollapsed);
-  useEffect(() => startSceneSync(), []);
+  const collapsed = useLayout((s) => s.rightCollapsed)
+  useEffect(() => startSceneSync(), [])
+  const sidebar = collapsed ? SIDEBAR_COLLAPSED : SIDEBAR_WIDTH
 
   return (
-    <>
-      <Group
-        orientation="horizontal"
-        className="min-h-0 flex-1"
-        defaultLayout={layout.defaultLayout}
-        onLayoutChanged={layout.onLayoutChanged}
-      >
-        <Panel
-          id="left"
-          panelRef={leftRef}
-          defaultSize={280}
-          minSize={220}
-          maxSize={420}
-          collapsible
-          collapsedSize={0}
-          groupResizeBehavior="preserve-pixel-size"
-          onResize={() => setLeftCollapsed(!!leftRef.current?.isCollapsed())}
-          className="pane h-full"
-        >
-          <LeftSidebar />
-        </Panel>
-        <ResizeHandle />
-        <Panel id="center" minSize={420} className="h-full">
-          <SceneStage />
-        </Panel>
-        <ResizeHandle />
-        <Panel
-          id="right"
-          panelRef={rightRef}
-          defaultSize={400}
-          minSize={320}
-          maxSize={640}
-          collapsible
-          collapsedSize={0}
-          groupResizeBehavior="preserve-pixel-size"
-          onResize={() => setRightCollapsed(!!rightRef.current?.isCollapsed())}
-          className="pane h-full"
-        >
-          <RightPanel />
-        </Panel>
-      </Group>
-      <FloatingWindows />
-    </>
-  );
-}
+    <div className="relative min-h-0 flex-1 overflow-hidden">
+      <div className="absolute inset-0" style={{ right: 0 }}>
+        <SceneStage rightInset={sidebar + 16} />
+      </div>
 
-/** localStorage can throw (e.g. disabled storage); layout memory is a convenience only. */
-function safeStorage(): Pick<Storage, "getItem" | "setItem"> {
-  return {
-    getItem: (k) => {
-      try {
-        return localStorage.getItem(k);
-      } catch {
-        return null;
-      }
-    },
-    setItem: (k, v) => {
-      try {
-        localStorage.setItem(k, v);
-      } catch {
-        /* ignore */
-      }
-    },
-  };
+      <aside
+        aria-label="Sidebar"
+        className={cn('absolute top-2 right-2 z-20 overflow-hidden rounded-lg border border-white/10 bg-background/85 shadow-2xl backdrop-blur-md transition-[width] duration-200', collapsed ? 'max-h-[calc(100%-16px)]' : 'bottom-2')}
+        style={{ width: sidebar }}
+      >
+        <RightPanel />
+      </aside>
+
+      <div className="absolute bottom-3 left-3 z-10">
+        <PlayersList />
+      </div>
+      <div className="pointer-events-none absolute bottom-3 z-10 flex justify-center" style={{ left: 232, right: sidebar + 16 }}>
+        <div className="pointer-events-auto">
+          <Hotbar />
+        </div>
+      </div>
+
+      <FloatingWindows />
+    </div>
+  )
 }

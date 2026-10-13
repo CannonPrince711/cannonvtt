@@ -51,7 +51,7 @@ function SetupState(): React.JSX.Element {
     <EmptyState
       size="lg"
       illustration={<LanternArt />}
-      title="The tavern is quiet"
+      title="The table is quiet"
       description={vaultMissing ? `The vault at ${settings?.vault.path} could not be opened.` : 'Connect an Obsidian vault and a text backend to begin.'}
       action={
         <div className="space-y-4">

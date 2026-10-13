@@ -21,11 +21,12 @@ type Drag =
   | { kind: 'measure'; from: { x: number; y: number }; to: { x: number; y: number } }
   | { kind: 'fog'; from: { x: number; y: number }; to: { x: number; y: number }; hide: boolean }
 
-/** Fits the whole scene in the viewport with a small margin. */
-function fitView(scene: Pick<Scene, 'width' | 'height'>, box: { width: number; height: number }): View {
-  if (!scene.width || !scene.height || !box.width || !box.height) return { scale: 1, tx: 0, ty: 0 }
-  const scale = Math.min(box.width / scene.width, box.height / scene.height) * 0.95
-  return { scale, tx: (box.width - scene.width * scale) / 2, ty: (box.height - scene.height * scale) / 2 }
+/** Fits the whole scene in the part of the viewport the sidebar doesn't cover, with a small margin. */
+function fitView(scene: Pick<Scene, 'width' | 'height'>, box: { width: number; height: number }, rightInset = 0): View {
+  const width = box.width - rightInset
+  if (!scene.width || !scene.height || width <= 0 || !box.height) return { scale: 1, tx: 0, ty: 0 }
+  const scale = Math.min(width / scene.width, box.height / scene.height) * 0.9
+  return { scale, tx: (width - scene.width * scale) / 2, ty: (box.height - scene.height * scale) / 2 }
 }
 
 function GridLines({ scene }: { scene: Scene }): React.JSX.Element | null {
@@ -112,7 +113,7 @@ function TokenView({ token, scene, selected, turn, offset }: { token: Token; sce
   )
 }
 
-export function SceneCanvas(): React.JSX.Element | null {
+export function SceneCanvas({ rightInset = 0 }: { rightInset?: number }): React.JSX.Element | null {
   const scene = useScene((s) => s.scene)
   const tool = useScene((s) => s.tool)
   const selected = useScene((s) => s.selected)
@@ -138,14 +139,14 @@ export function SceneCanvas(): React.JSX.Element | null {
     if (!scene || !ref.current || !scene.width) return
     if (fittedFor.current === scene.path) return
     fittedFor.current = scene.path
-    setView(fitView(scene, ref.current.getBoundingClientRect()))
+    setView(fitView(scene, ref.current.getBoundingClientRect(), rightInset))
     setHud(null)
   }, [scene])
 
   const fitNonce = useScene((s) => s.fitNonce)
   useEffect(() => {
     const s = useScene.getState().scene
-    if (fitNonce && s && ref.current) setView(fitView(s, ref.current.getBoundingClientRect()))
+    if (fitNonce && s && ref.current) setView(fitView(s, ref.current.getBoundingClientRect(), rightInset))
   }, [fitNonce])
 
   // Zoom with the wheel around the cursor (non-passive so the page doesn't scroll).

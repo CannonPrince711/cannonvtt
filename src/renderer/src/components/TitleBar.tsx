@@ -1,4 +1,4 @@
-import { Palette, PanelLeft, PanelRight, Search, Settings } from 'lucide-react'
+import { Palette, PanelRight, Search, Settings } from 'lucide-react'
 import { THEMES } from '@shared/themes'
 import type { ThemeId } from '@shared/types'
 import { Logo } from '@/components/Logo'
@@ -29,7 +29,7 @@ export function TitleBar(): React.JSX.Element {
   const settings = useApp((s) => s.settings)
   const focused = useApp((s) => s.window.focused)
   const updateSettings = useApp((s) => s.updateSettings)
-  const { leftCollapsed, rightCollapsed, toggleLeft, toggleRight } = useLayout()
+  const { rightCollapsed, toggleRight } = useLayout()
   const campaign = useActiveCampaign()
   const openSettings = useUi((s) => s.openSettings)
 
@@ -69,22 +69,11 @@ export function TitleBar(): React.JSX.Element {
             <Search />
           </Button>
         </Tip>
-        <Tip label={leftCollapsed ? 'Show sidebar' : 'Hide sidebar'}>
+        <Tip label={rightCollapsed ? 'Expand the sidebar' : 'Collapse the sidebar'}>
           <Button
             variant="ghost"
             size="icon-sm"
-            aria-label="Toggle left sidebar"
-            aria-pressed={!leftCollapsed}
-            onClick={toggleLeft}
-          >
-            <PanelLeft />
-          </Button>
-        </Tip>
-        <Tip label={rightCollapsed ? 'Show panel' : 'Hide panel'}>
-          <Button
-            variant="ghost"
-            size="icon-sm"
-            aria-label="Toggle right panel"
+            aria-label="Toggle sidebar"
             aria-pressed={!rightCollapsed}
             onClick={toggleRight}
           >

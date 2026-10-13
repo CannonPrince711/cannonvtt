@@ -13,11 +13,11 @@ import { SceneControls } from './SceneControls'
 import { NewSceneDialog } from './ScenesPanel'
 
 /** Scene tabs along the top of the canvas, like Foundry's scene navigation. */
-function SceneNav({ onNew }: { onNew: () => void }): React.JSX.Element {
+function SceneNav({ onNew, rightInset }: { onNew: () => void; rightInset: number }): React.JSX.Element {
   const scenes = useScene((s) => s.scenes)
   const current = useScene((s) => s.scene?.path)
   return (
-    <nav aria-label="Scenes" className="absolute top-3 left-3 z-10 flex max-w-[calc(100%-24px)] items-center gap-1 overflow-x-auto rounded-lg border bg-black/50 p-1 backdrop-blur" onPointerDown={(e) => e.stopPropagation()}>
+    <nav aria-label="Scenes" style={{ maxWidth: `calc(100% - ${rightInset + 24}px)` }} className="absolute top-3 left-3 z-10 flex items-center gap-1 overflow-x-auto rounded-lg border bg-black/50 p-1 backdrop-blur" onPointerDown={(e) => e.stopPropagation()}>
       {scenes.map((s) => (
         <button
           key={s.path}
@@ -38,7 +38,7 @@ function SceneNav({ onNew }: { onNew: () => void }): React.JSX.Element {
 }
 
 /** The middle of the window: the scene canvas with its controls, or a way to make the first scene. */
-export function SceneStage(): React.JSX.Element {
+export function SceneStage({ rightInset = 0 }: { rightInset?: number }): React.JSX.Element {
   const scene = useScene((s) => s.scene)
   const campaign = useScene((s) => s.campaign)
   const index = useVault((s) => s.index)
@@ -49,7 +49,15 @@ export function SceneStage(): React.JSX.Element {
   if (!index) {
     empty = <EmptyState size="lg" illustration={<LanternArt />} title="No vault open" description={settings?.vault.path ? `The vault at ${settings.vault.path} could not be opened.` : 'Choose a vault in Settings to begin.'} />
   } else if (!campaign) {
-    empty = <EmptyState size="lg" illustration={<LanternArt />} title="No campaign" description="Pick or create a campaign in the left sidebar, then add a scene." />
+    empty = (
+      <EmptyState
+        size="lg"
+        illustration={<LanternArt />}
+        title="No campaign"
+        description="Pick or create a campaign in the Journal tab, then add a scene."
+        action={<Button onClick={() => useLayout.getState().openTab('journal')}>Open the Journal</Button>}
+      />
+    )
   } else if (!scene) {
     empty = (
       <EmptyState
@@ -62,7 +70,7 @@ export function SceneStage(): React.JSX.Element {
             <Button onClick={() => setCreating(true)}>
               <MapIcon /> New scene
             </Button>
-            <Button variant="outline" onClick={() => useLayout.getState().setRightTab('chat')}>
+            <Button variant="outline" onClick={() => useLayout.getState().openTab('chat')}>
               Open chat
             </Button>
           </div>
@@ -74,11 +82,13 @@ export function SceneStage(): React.JSX.Element {
   return (
     <div className="relative size-full overflow-hidden">
       {empty ? (
-        <div className="flex size-full items-center justify-center">{empty}</div>
+        <div className="flex size-full items-center justify-center pb-20" style={{ paddingRight: rightInset }}>
+          {empty}
+        </div>
       ) : (
         <>
-          <SceneCanvas />
-          <SceneNav onNew={() => setCreating(true)} />
+          <SceneCanvas rightInset={rightInset} />
+          <SceneNav onNew={() => setCreating(true)} rightInset={rightInset} />
           <SceneControls />
         </>
       )}

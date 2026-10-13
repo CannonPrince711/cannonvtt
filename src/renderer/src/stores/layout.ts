@@ -1,25 +1,23 @@
 import { create } from 'zustand'
 
-export type RightTab = 'chat' | 'scenes' | 'actors' | 'sheet' | 'combat' | 'lore' | 'images' | 'graph' | 'table' | 'dm' | 'extensions'
+export type RightTab = 'chat' | 'combat' | 'scenes' | 'actors' | 'journal' | 'lore' | 'images' | 'table' | 'dm' | 'extensions' | 'sheet' | 'graph'
 
 interface LayoutStore {
-  leftCollapsed: boolean
+  /** The sidebar shrinks to its icon column, like Foundry's collapsed sidebar. */
   rightCollapsed: boolean
   rightTab: RightTab
-  setLeftCollapsed: (v: boolean) => void
   setRightCollapsed: (v: boolean) => void
-  toggleLeft: () => void
   toggleRight: () => void
   setRightTab: (tab: RightTab) => void
+  /** Shows a tab, expanding the sidebar if needed. */
+  openTab: (tab: RightTab) => void
 }
 
 export const useLayout = create<LayoutStore>((set) => ({
-  leftCollapsed: false,
   rightCollapsed: false,
   rightTab: 'chat',
-  setLeftCollapsed: (leftCollapsed) => set({ leftCollapsed }),
   setRightCollapsed: (rightCollapsed) => set({ rightCollapsed }),
-  toggleLeft: () => set((s) => ({ leftCollapsed: !s.leftCollapsed })),
   toggleRight: () => set((s) => ({ rightCollapsed: !s.rightCollapsed })),
-  setRightTab: (rightTab) => set({ rightTab })
+  setRightTab: (rightTab) => set({ rightTab }),
+  openTab: (rightTab) => set({ rightTab, rightCollapsed: false })
 }))

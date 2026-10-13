@@ -4,6 +4,7 @@ import { registerAppHandlers } from './handlers/app'
 import { registerBackendHandlers } from './handlers/backends'
 import { registerModelHandlers } from './handlers/models'
 import { registerMapHandlers } from './handlers/maps'
+import { registerSceneHandlers } from './handlers/scenes'
 import { registerTableHandlers, stopTable } from './handlers/table'
 import { registerCharacterHandlers } from './handlers/characters'
 import { registerImageHandlers } from './handlers/images'
@@ -62,6 +63,7 @@ if (!app.requestSingleInstanceLock()) {
     registerBackendHandlers()
     registerModelHandlers()
     registerMapHandlers()
+    registerSceneHandlers()
     registerTableHandlers()
     registerSessionHandlers()
     registerCharacterHandlers()

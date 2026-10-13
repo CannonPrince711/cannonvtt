@@ -110,8 +110,9 @@ const DND_TERMS = { race: 'Race', class: 'Class', level: 'Level', spells: 'Spell
 
 const COIN_NAMES = { pp: 'Platinum pieces', gp: 'Gold pieces', ep: 'Electrum pieces', sp: 'Silver pieces', cp: 'Copper pieces' }
 
-export function SheetPanel(): React.JSX.Element {
-  const path = useActiveCharacterPath()
+export function SheetPanel({ path: forced }: { path?: string } = {}): React.JSX.Element {
+  const activePath = useActiveCharacterPath()
+  const path = forced ?? activePath
   const { note, updateSheet } = useCharacterNote(path)
   const rootFolder = useVault((s) => s.index?.rootFolder ?? 'Cannon VTT')
   const hasSession = useChat((s) => !!s.session)

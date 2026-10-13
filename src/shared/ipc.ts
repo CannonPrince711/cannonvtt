@@ -11,6 +11,7 @@
 import type { SessionRecap } from './recap'
 import type { VaultGraph } from './graph'
 import type { CampaignMap, MapPin, MapScale, PartyMarker } from './map'
+import type { Scene, SceneSummary } from './scene'
 import type { CampaignConcept, CampaignDraft } from './builder'
 import type { Edition } from './editions'
 import type { Ruleset } from './rulesets'
@@ -171,6 +172,10 @@ export interface InvokeMap {
   'maps:importImage': Invoke<[campaignPath: VaultPath], string | null>
   'maps:images': Invoke<[campaignPath: VaultPath], string[]>
   /** With fromSketch, asks for a sketch to paint over (img2img); null when that was cancelled. */
+  'scenes:list': Invoke<[campaignPath: VaultPath], SceneSummary[]>
+  'scenes:get': Invoke<[scenePath: VaultPath], Scene>
+  'scenes:create': Invoke<[campaignPath: VaultPath, opts: { name: string; image: string; width?: number; height?: number }], Scene>
+  'scenes:save': Invoke<[scenePath: VaultPath, patch: Partial<Pick<Scene, 'image' | 'width' | 'height' | 'grid' | 'tokens' | 'fog' | 'active'>>], Scene>
   'maps:generate': Invoke<[campaignPath: VaultPath, extra?: string, opts?: { fromSketch?: boolean }], string | null>
   /**
    * Campaign settings (Campaign.md frontmatter): rules edition, sourcebooks, default mode, setting, tone, house rules,
@@ -435,6 +440,10 @@ const invokeChannels = {
   'maps:importImage': 1,
   'maps:images': 1,
   'maps:generate': 1,
+  'scenes:list': 1,
+  'scenes:get': 1,
+  'scenes:create': 1,
+  'scenes:save': 1,
   'campaigns:draft': 1,
   'campaigns:cancelDraft': 1,
   'campaigns:redraftPiece': 1,

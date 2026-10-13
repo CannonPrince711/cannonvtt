@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-export type RightTab = 'sheet' | 'combat' | 'lore' | 'images' | 'graph' | 'table' | 'dm' | 'extensions'
+export type RightTab = 'chat' | 'scenes' | 'actors' | 'sheet' | 'combat' | 'lore' | 'images' | 'graph' | 'table' | 'dm' | 'extensions'
 
 interface LayoutStore {
   leftCollapsed: boolean
@@ -16,7 +16,7 @@ interface LayoutStore {
 export const useLayout = create<LayoutStore>((set) => ({
   leftCollapsed: false,
   rightCollapsed: false,
-  rightTab: 'sheet',
+  rightTab: 'chat',
   setLeftCollapsed: (leftCollapsed) => set({ leftCollapsed }),
   setRightCollapsed: (rightCollapsed) => set({ rightCollapsed }),
   toggleLeft: () => set((s) => ({ leftCollapsed: !s.leftCollapsed })),

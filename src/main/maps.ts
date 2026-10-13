@@ -27,7 +27,7 @@ async function findMapNote(vault: Vault, campaignPath: VaultPath): Promise<{ pat
  * Resolves the stored image reference: a bare file name (in the campaign's
  * Images folder), a path relative to the campaign folder, or a vault path.
  */
-function imagePath(vault: Vault, campaignPath: VaultPath, raw: unknown): string {
+export function imagePath(vault: Vault, campaignPath: VaultPath, raw: unknown): string {
   if (typeof raw !== 'string') return ''
   const v = raw.trim().replace(/^!?\[\[|\]\]$/g, '').split('|')[0]!.trim()
   if (!v) return ''

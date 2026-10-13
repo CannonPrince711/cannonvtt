@@ -3,7 +3,7 @@
   "name": "Weather & Time",
   "version": "1.0.0",
   "description": "Keeps an in-world clock and weather, and tells the DM about them in every prompt.",
-  "author": "DND Tavern",
+  "author": "Cannon VTT",
   "permissions": [],
   "commands": [
     { "name": "time", "description": "Show the time, or advance it: /time advance 2h, /time set 3 08:00", "usage": "/time [advance 2h | set <day> <hh:mm>]" },

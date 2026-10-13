@@ -36,7 +36,7 @@ function StartupError({ message }: { message: string }): React.JSX.Element {
   return (
     <div className="grid h-full place-items-center p-8 text-center">
       <div className="max-w-md space-y-2">
-        <h1 className="font-display text-lg">DND Tavern could not start</h1>
+        <h1 className="font-display text-lg">Cannon VTT could not start</h1>
         <p className="selectable text-sm text-muted-foreground">{message}</p>
       </div>
     </div>

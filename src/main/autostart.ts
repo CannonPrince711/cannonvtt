@@ -16,7 +16,7 @@ export async function setLaunchOnStartup(on: boolean): Promise<void> {
     app.setLoginItemSettings({ openAtLogin: on })
     return
   }
-  const file = join(app.getPath('appData'), 'autostart', 'dnd-tavern.desktop')
+  const file = join(app.getPath('appData'), 'autostart', 'cannon-vtt.desktop')
   if (!on) {
     await fs.rm(file, { force: true })
     return
@@ -26,6 +26,6 @@ export async function setLaunchOnStartup(on: boolean): Promise<void> {
   await fs.mkdir(dirname(file), { recursive: true })
   await fs.writeFile(
     file,
-    ['[Desktop Entry]', 'Type=Application', 'Name=DND Tavern', `Exec=${desktopExec(exe)}`, 'Icon=dnd-tavern', 'Terminal=false', 'X-GNOME-Autostart-enabled=true', ''].join('\n')
+    ['[Desktop Entry]', 'Type=Application', 'Name=Cannon VTT', `Exec=${desktopExec(exe)}`, 'Icon=cannon-vtt', 'Terminal=false', 'X-GNOME-Autostart-enabled=true', ''].join('\n')
   )
 }

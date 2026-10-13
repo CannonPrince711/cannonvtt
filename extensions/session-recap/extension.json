@@ -3,7 +3,7 @@
   "name": "Session Recap",
   "version": "1.0.0",
   "description": "Summarises the current session and appends the recap to the campaign’s Campaign.md: /recap.",
-  "author": "DND Tavern",
+  "author": "Cannon VTT",
   "permissions": ["generate:text", "vault:read", "vault:write"],
   "commands": [{ "name": "recap", "description": "Summarise this session into Campaign.md", "usage": "/recap" }]
 }

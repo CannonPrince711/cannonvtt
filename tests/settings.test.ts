@@ -10,7 +10,7 @@ import { PROMPT_BLOCK_IDS } from '@shared/types'
 describe('settings schema', () => {
   it('fills every section from an empty object', () => {
     const s = defaultSettings()
-    expect(s.vault.rootFolder).toBe('DND Tavern')
+    expect(s.vault.rootFolder).toBe('Cannon VTT')
     expect(s.appearance.theme).toBe('dark')
     expect(s.appearance.uiScale).toBe(1)
     expect(s.behavior.autoUpdateCheck).toBe(false)
@@ -23,7 +23,7 @@ describe('settings schema', () => {
     expect(s.appearance.theme).toBe('parchment')
     expect(s.appearance.chatFontSize).toBe(17)
     expect(s.vault.path).toBe('C:\\Vault')
-    expect(s.vault.rootFolder).toBe('DND Tavern')
+    expect(s.vault.rootFolder).toBe('Cannon VTT')
   })
 
   it('rejects out-of-range values', () => {

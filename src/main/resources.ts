@@ -87,7 +87,7 @@ Shared material every campaign can use.
 - **Lore/**: lorebooks every world sees. Their entries reach the DM when a trigger word comes up, like any lorebook. A world can turn them off in its campaign settings, on the **This world** tab.
 - **Images/**: generic portraits, maps and battlemaps. They are offered in every campaign's map image chooser.
 
-DND Tavern wrote the starter lorebooks once. Edit them, add your own, or delete what you don't need: they won't come back.
+Cannon VTT wrote the starter lorebooks once. Edit them, add your own, or delete what you don't need: they won't come back.
 `
 
 /** Every starter file, by its path under the root folder, with the content this version ships. */
@@ -124,7 +124,7 @@ async function readMarker(vault: Vault): Promise<Marker | null> {
 }
 
 async function writeMarker(vault: Vault, notes: Record<string, string>): Promise<void> {
-  const text = JSON.stringify({ about: 'DND Tavern set up the Resources folder in this vault. It updates the starter notes you have not edited.', notes }, null, 2)
+  const text = JSON.stringify({ about: 'Cannon VTT set up the Resources folder in this vault. It updates the starter notes you have not edited.', notes }, null, 2)
   await vault.mutate(vault.rootPath(RESOURCES_MARKER), () => `${text}\n`).catch(() => {})
 }
 

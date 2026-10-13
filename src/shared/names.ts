@@ -31,7 +31,7 @@ export function joinVaultPath(...parts: string[]): string {
     .join('/')
 }
 
-/** "DND Tavern/Characters/Aria.md" → "Aria" */
+/** "Cannon VTT/Characters/Aria.md" → "Aria" */
 export function noteName(path: string): string {
   const base = path.split('/').pop() ?? path
   return base.replace(/\.md$/i, '')
@@ -42,7 +42,7 @@ export function dirName(path: string): string {
   return i === -1 ? '' : path.slice(0, i)
 }
 
-/** "[[Aria]]" or "[[DND Tavern/Characters/Aria|Aria]]" for a note path. */
+/** "[[Aria]]" or "[[Cannon VTT/Characters/Aria|Aria]]" for a note path. */
 export function toWikilink(path: string, opts: { full?: boolean; alias?: string } = {}): string {
   const name = noteName(path)
   if (!opts.full) return opts.alias && opts.alias !== name ? `[[${name}|${opts.alias}]]` : `[[${name}]]`

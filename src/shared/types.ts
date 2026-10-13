@@ -322,7 +322,7 @@ export interface Lorebook {
 }
 
 export interface Campaign {
-  /** Folder path, e.g. "DND Tavern/Campaigns/The Sunken Lantern". */
+  /** Folder path, e.g. "Cannon VTT/Campaigns/The Sunken Lantern". */
   path: VaultPath
   name: string
   setting: string
@@ -571,7 +571,7 @@ export interface ExtensionInfo {
   hasUi: boolean
   /** Current values of the extension's settings (defaults filled in). */
   values: Record<string, unknown>
-  /** Shipped with DND Tavern (copied from the app on first run). */
+  /** Shipped with Cannon VTT (copied from the app on first run). */
   bundled: boolean
 }
 

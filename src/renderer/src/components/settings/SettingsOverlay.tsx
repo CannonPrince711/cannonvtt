@@ -17,7 +17,7 @@ import { useApp } from '@/stores/app'
 
 const NAV: { id: SettingsSection; label: string; icon: React.ElementType; description: string }[] = [
   { id: 'general', label: 'General', icon: Settings2, description: 'Vault, player and behaviour' },
-  { id: 'updates', label: 'Updates', icon: ArrowDownCircle, description: 'Get the newest version of DND Tavern' },
+  { id: 'updates', label: 'Updates', icon: ArrowDownCircle, description: 'Get the newest version of Cannon VTT' },
   { id: 'appearance', label: 'Appearance', icon: Palette, description: 'Theme, scale and motion' },
   { id: 'text', label: 'Text backends', icon: Cpu, description: 'LLMs for the DM, summaries and prompts' },
   { id: 'images', label: 'Image backends', icon: ImageIcon, description: 'ComfyUI, Automatic1111 and more' },

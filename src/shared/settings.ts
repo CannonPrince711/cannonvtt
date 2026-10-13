@@ -1,5 +1,5 @@
 /**
- * Settings schemas (zod). Settings live in %APPDATA%\DND Tavern\settings.json,
+ * Settings schemas (zod). Settings live in %APPDATA%\Cannon VTT\settings.json,
  * never in the vault.
  *
  * Secrets (API keys, secret headers) have three shapes:
@@ -176,7 +176,7 @@ export const ComfyWorkflowSchema = z.object({
   purpose: z.enum(['portrait', 'scene', 'map', 'battlemap', 'other']).default('other'),
   /** Where the API-format JSON lives. */
   location: z.enum(['appdata', 'vault']).default('appdata'),
-  /** Relative to %APPDATA%\DND Tavern\workflows\ or to the vault root. */
+  /** Relative to %APPDATA%\Cannon VTT\workflows\ or to the vault root. */
   file: z.string(),
   mapping: ComfyMappingSchema.prefault({}),
   seedMode: z.enum(['random', 'fixed']).default('random'),
@@ -326,7 +326,7 @@ export const SettingsSchema = z.object({
   vault: z
     .object({
       path: z.string().default(''),
-      rootFolder: z.string().default('DND Tavern')
+      rootFolder: z.string().default('Cannon VTT')
     })
     .prefault({}),
   textBackends: z.array(TextBackendSchema).default([]),

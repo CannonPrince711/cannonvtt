@@ -37,7 +37,7 @@ describe('Obsidian vault detection', () => {
 
 describe('Linux autostart entry', () => {
   it('quotes the executable path for the Exec line', () => {
-    expect(desktopExec('/opt/DND Tavern/dnd-tavern')).toBe('"/opt/DND Tavern/dnd-tavern"')
+    expect(desktopExec('/opt/Cannon VTT/cannon-vtt')).toBe('"/opt/Cannon VTT/cannon-vtt"')
     expect(desktopExec('/home/a/$weird "name"')).toBe('"/home/a/\\$weird \\"name\\""')
   })
 })

@@ -35,13 +35,13 @@ describe('sanitizeFileName', () => {
 
 describe('paths and wikilinks', () => {
   it('joins with forward slashes', () => {
-    expect(joinVaultPath('DND Tavern\\Campaigns', '/A/', 'Sessions')).toBe('DND Tavern/Campaigns/A/Sessions')
+    expect(joinVaultPath('Cannon VTT\\Campaigns', '/A/', 'Sessions')).toBe('Cannon VTT/Campaigns/A/Sessions')
   })
   it('gets note names', () => {
-    expect(noteName('DND Tavern/Characters/Aria.md')).toBe('Aria')
+    expect(noteName('Cannon VTT/Characters/Aria.md')).toBe('Aria')
   })
   it('builds wikilinks', () => {
-    expect(toWikilink('DND Tavern/Characters/Aria.md')).toBe('[[Aria]]')
+    expect(toWikilink('Cannon VTT/Characters/Aria.md')).toBe('[[Aria]]')
     expect(toWikilink('X/Aria.md', { full: true })).toBe('[[X/Aria|Aria]]')
   })
   it('parses wikilinks with headings, aliases and embeds', () => {
@@ -63,35 +63,35 @@ describe('paths and wikilinks', () => {
 })
 
 describe('classifyPath', () => {
-  const root = 'DND Tavern'
+  const root = 'Cannon VTT'
   it('recognises each note type', () => {
-    expect(classifyPath(root, 'DND Tavern/Characters/Aria.md')?.kind).toBe('character')
-    expect(classifyPath(root, 'DND Tavern/NPCs/Bob.md')?.kind).toBe('npc')
-    expect(classifyPath(root, 'DND Tavern/Lorebooks/World.md')?.kind).toBe('lorebook')
-    expect(classifyPath(root, 'DND Tavern/Presets/Classic DM.md')?.kind).toBe('preset')
-    expect(classifyPath(root, 'DND Tavern/Campaigns/Lantern/Campaign.md')).toEqual({
+    expect(classifyPath(root, 'Cannon VTT/Characters/Aria.md')?.kind).toBe('character')
+    expect(classifyPath(root, 'Cannon VTT/NPCs/Bob.md')?.kind).toBe('npc')
+    expect(classifyPath(root, 'Cannon VTT/Lorebooks/World.md')?.kind).toBe('lorebook')
+    expect(classifyPath(root, 'Cannon VTT/Presets/Classic DM.md')?.kind).toBe('preset')
+    expect(classifyPath(root, 'Cannon VTT/Campaigns/Lantern/Campaign.md')).toEqual({
       kind: 'campaign',
-      campaignPath: 'DND Tavern/Campaigns/Lantern'
+      campaignPath: 'Cannon VTT/Campaigns/Lantern'
     })
-    expect(classifyPath(root, 'DND Tavern/Campaigns/Lantern/Sessions/2026-10-10 Session 01.md')).toEqual({
+    expect(classifyPath(root, 'Cannon VTT/Campaigns/Lantern/Sessions/2026-10-10 Session 01.md')).toEqual({
       kind: 'session',
-      campaignPath: 'DND Tavern/Campaigns/Lantern'
+      campaignPath: 'Cannon VTT/Campaigns/Lantern'
     })
   })
   it('ignores everything else', () => {
     expect(classifyPath(root, 'Other/Characters/Aria.md')).toBeNull()
-    expect(classifyPath(root, 'DND Tavern/Characters/avatars/aria.png')).toBeNull()
-    expect(classifyPath(root, 'DND Tavern/Characters/sub/Aria.md')).toBeNull()
-    expect(classifyPath(root, 'DND Tavern/Campaigns/Lantern/Images/x.md')).toBeNull()
+    expect(classifyPath(root, 'Cannon VTT/Characters/avatars/aria.png')).toBeNull()
+    expect(classifyPath(root, 'Cannon VTT/Characters/sub/Aria.md')).toBeNull()
+    expect(classifyPath(root, 'Cannon VTT/Campaigns/Lantern/Images/x.md')).toBeNull()
   })
   it('is case-insensitive like Windows', () => {
-    expect(classifyPath(root, 'dnd tavern/characters/Aria.md')?.kind).toBe('character')
+    expect(classifyPath(root, 'cannon vtt/characters/Aria.md')?.kind).toBe('character')
   })
 })
 
 describe('normalizeRootFolder', () => {
   it('accepts nested folders', () => {
-    expect(normalizeRootFolder(' Games\\DND Tavern/ ')).toBe('Games/DND Tavern')
+    expect(normalizeRootFolder(' Games\\Cannon VTT/ ')).toBe('Games/Cannon VTT')
   })
   it('rejects traversal, dot-folders and bad characters', () => {
     expect(normalizeRootFolder('../x')).toBeNull()

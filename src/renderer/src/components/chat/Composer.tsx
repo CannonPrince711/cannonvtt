@@ -17,7 +17,7 @@ import { useApp } from '@/stores/app'
 import { nextTurn, submitMessage, useAutoplay } from '@/lib/play'
 import { useUi } from '@/stores/ui'
 
-const DRAFT_KEY = (path: string): string => `dnd-tavern:draft:${path}`
+const DRAFT_KEY = (path: string): string => `cannon-vtt:draft:${path}`
 
 const PLACEHOLDER: Record<PlayMode, string> = {
   'ai-dm': 'What do you do?  (/ for commands)',

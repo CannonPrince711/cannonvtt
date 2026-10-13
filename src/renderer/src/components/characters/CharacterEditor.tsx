@@ -57,7 +57,7 @@ function TextField({
 export function CharacterEditor(): React.JSX.Element | null {
   const path = useUi((s) => s.editingCharacter)
   const close = (): void => useUi.setState({ editingCharacter: null })
-  const rootFolder = useVault((s) => s.index?.rootFolder ?? 'DND Tavern')
+  const rootFolder = useVault((s) => s.index?.rootFolder ?? 'Cannon VTT')
   const [note, setNote] = useState<CharacterNote | null>(null)
   const [draft, setDraft] = useState<CharacterNote | null>(null)
   const [tags, setTags] = useState('')

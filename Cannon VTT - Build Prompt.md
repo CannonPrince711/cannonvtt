@@ -1,4 +1,4 @@
-# Build Prompt: "DND Tavern", a Windows desktop app (.exe) that stores its data in an Obsidian vault
+# Build Prompt: "Cannon VTT", a Windows desktop app (.exe) that stores its data in an Obsidian vault
 
 > Copy everything below the line into your coding assistant.
 
@@ -6,7 +6,7 @@
 
 ## Role and goal
 
-You are a senior full-stack TypeScript and Electron developer with a strong eye for UI design. Build **DND Tavern**, a **standalone Windows desktop app**. It is a chat frontend in the style of SillyTavern for running Dungeons & Dragons–style text adventures with LLMs. It is **not** an Obsidian plugin and not a browser app. It ships as an **`.exe`**: an installer plus a portable version. The user double-clicks it and gets a polished, good-looking native window.
+You are a senior full-stack TypeScript and Electron developer with a strong eye for UI design. Build **Cannon VTT**, a **standalone Windows desktop app**. It is a chat frontend in the style of SillyTavern for running Dungeons & Dragons–style text adventures with LLMs. It is **not** an Obsidian plugin and not a browser app. It ships as an **`.exe`**: an installer plus a portable version. The user double-clicks it and gets a polished, good-looking native window.
 
 All of its data is stored as plain Markdown and image files inside a folder of an **Obsidian vault**. That data includes characters, lorebooks, campaigns, session logs, character sheets and generated images. The user can keep Obsidian open next to the app and browse, link, search and edit the same files. Changes made in either one appear in the other.
 
@@ -35,8 +35,8 @@ Text and image generators may run **outside the user's local network**, for exam
   - `zod` to validate settings and IPC data
   - `undici` for HTTP requests with proxy support
 - **Packaging:** use **electron-builder** to produce:
-  - an **NSIS installer** `DND Tavern Setup x.y.z.exe`, with a Start Menu entry, a desktop shortcut and an uninstaller
-  - a **portable** `DND Tavern x.y.z.exe`
+  - an **NSIS installer** `Cannon VTT Setup x.y.z.exe`, with a Start Menu entry, a desktop shortcut and an uninstaller
+  - a **portable** `Cannon VTT x.y.z.exe`
   - a proper app icon (`.ico`)
   - an app ID and a product name
   - Auto-update with `electron-updater` is optional and turned off by default.
@@ -48,7 +48,7 @@ Text and image generators may run **outside the user's local network**, for exam
 
 ## Obsidian vault as storage
 
-- **Settings:** a **vault path** setting (for example `C:\Users\Me\Documents\MyVault`), chosen with the native folder-picker dialog, and a **root folder** inside it (default `DND Tavern/`).
+- **Settings:** a **vault path** setting (for example `C:\Users\Me\Documents\MyVault`), chosen with the native folder-picker dialog, and a **root folder** inside it (default `Cannon VTT/`).
   - On first launch, a setup wizard asks for the vault. It can also find existing vaults by reading Obsidian's `%APPDATA%\obsidian\obsidian.json` and offering them in a list.
   - The app checks that the path contains `.obsidian/`. If it doesn't, the app warns the user but still works with any plain folder.
   - The app **never** reads or writes `.obsidian/`.
@@ -67,7 +67,7 @@ Text and image generators may run **outside the user's local network**, for exam
 ### Vault layout
 
 ```
-<Vault>/DND Tavern/
+<Vault>/Cannon VTT/
   Characters/     <name>.md          frontmatter = character card + D&D sheet; body = notes
   Characters/avatars/<name>.png
   Lorebooks/      <book>.md          one H2 section per entry, keys in an inline field: `keys:: dragon, wyrm`
@@ -191,7 +191,7 @@ Assemble prompts in this order. Each block can be turned on or off, and the user
 
 ## Settings (most important part)
 
-Settings are stored **outside the vault**, in the app's `userData` folder (`%APPDATA%\DND Tavern\settings.json`). This keeps API keys out of Obsidian Sync, Git and cloud-synced vaults.
+Settings are stored **outside the vault**, in the app's `userData` folder (`%APPDATA%\Cannon VTT\settings.json`). This keeps API keys out of Obsidian Sync, Git and cloud-synced vaults.
 
 **API keys** are encrypted with Electron **`safeStorage`** (Windows DPAPI) and are never stored in plaintext.
 
@@ -232,7 +232,7 @@ A list of backends with the same management features. Supported types:
 
 **ComfyUI** (fully supported):
 - **Connection:** base URL (remote allowed), auth headers, and an option to accept a self-signed certificate.
-- **Workflow:** the user uploads or picks a workflow in **API format** (JSON). The workflow is stored in `%APPDATA%\DND Tavern\workflows\` or in the vault.
+- **Workflow:** the user uploads or picks a workflow in **API format** (JSON). The workflow is stored in `%APPDATA%\Cannon VTT\workflows\` or in the vault.
 - **Node mapping:** a UI that lists the nodes in the workflow. For each of these values, the user picks the node ID and input name that receives it:
   - positive prompt
   - negative prompt
@@ -288,7 +288,7 @@ A list of backends with the same management features. Supported types:
 
 ## Extensions (plugin system)
 
-- **Location:** extensions live in `%APPDATA%\DND Tavern\extensions\`, not in the vault. An "Open extensions folder" button opens it. Each extension is a folder with:
+- **Location:** extensions live in `%APPDATA%\Cannon VTT\extensions\`, not in the vault. An "Open extensions folder" button opens it. Each extension is a folder with:
   - `extension.json`: id, name, version, description, permissions
   - `main.js` (optional): runs in the main process inside a restricted context (Node `vm`), with only the `ctx` API exposed
   - `ui.js` (optional): runs in the renderer to provide UI panels

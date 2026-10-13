@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ---------------------------------------------------------------------------
-#  DND Tavern release for Linux: builds the AppImage and .deb and publishes
+#  Cannon VTT release for Linux: builds the AppImage and .deb and publishes
 #  them to GitHub Releases, so AppImage copies can update themselves.
 #
 #  Usage:  ./release.sh [version] [--dry]
@@ -38,7 +38,7 @@ done
 
 CURVER=$(node -p "require('./package.json').version")
 echo
-echo " DND Tavern release (Linux)"
+echo " Cannon VTT release (Linux)"
 echo " Current version: $CURVER"
 [ -n "$DRY" ] && echo " Dry run: nothing will be published."
 echo
@@ -60,7 +60,7 @@ if [ -z "$DRY" ]; then
   fi
   [ -n "${GH_TOKEN:-}" ] || fail "No GitHub token, so nothing can be published."
   export GH_TOKEN
-  echo "Publishing DND Tavern v$VERSION (Linux) to GitHub Releases..."
+  echo "Publishing Cannon VTT v$VERSION (Linux) to GitHub Releases..."
   echo
   npm run release:linux || fail
 else
@@ -72,7 +72,7 @@ if [ -n "$DRY" ]; then
   echo " Built v$VERSION in the dist folder. Nothing was published."
 else
   echo " Published v$VERSION:"
-  echo "   https://github.com/CannonPrince711/cannontavern/releases"
+  echo "   https://github.com/CannonPrince711/cannonvtt/releases"
   echo
   echo " AppImage copies find it with Settings > General > Updates > Check now."
   echo " The repository is private: make its releases public, or updates can't download."

@@ -1,6 +1,6 @@
 /**
  * The context window a self-hosted server actually loaded. The backend's
- * "Context size" setting is what DND Tavern plans for, but servers such as
+ * "Context size" setting is what Cannon VTT plans for, but servers such as
  * KoboldCpp fix their window at launch (--contextsize, 4096 by default), and a
  * prompt planned for a bigger window gets silently cut. Asking the server and
  * using the smaller of the two avoids that.

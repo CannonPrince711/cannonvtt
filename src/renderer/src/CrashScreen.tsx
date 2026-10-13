@@ -23,7 +23,7 @@ export class CrashScreen extends Component<{ children: ReactNode }, { error: Err
     const details = `${error.name}: ${error.message}\n${error.stack ?? ''}\n\nComponents:${stack}`
     return (
       <div style={{ minHeight: '100vh', padding: 32, background: '#121014', color: '#e8e2d6', fontFamily: 'system-ui, sans-serif' }}>
-        <h1 style={{ fontSize: 20, marginBottom: 8 }}>DND Tavern hit a problem</h1>
+        <h1 style={{ fontSize: 20, marginBottom: 8 }}>Cannon VTT hit a problem</h1>
         <p style={{ color: '#a59d90', marginBottom: 16, maxWidth: 640, lineHeight: 1.5 }}>
           The window couldn’t be drawn. Your vault and settings are safe. Reload to try again; if it keeps happening, copy the details and report them.
         </p>

@@ -3,7 +3,7 @@
   "name": "Map Pins",
   "version": "1.0.0",
   "description": "Links locations to a map note: /pin The Drowned Bell — under the harbour. Keeps a “<Campaign> Map” note with every pin.",
-  "author": "DND Tavern",
+  "author": "Cannon VTT",
   "permissions": ["vault:read", "vault:write"],
   "commands": [
     { "name": "pin", "description": "Pin a location to the campaign map (optional note after —)", "usage": "/pin <location> [— note]" },

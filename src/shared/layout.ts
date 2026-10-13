@@ -42,7 +42,7 @@ export interface Classified {
 }
 
 /**
- * Classifies a vault path ("DND Tavern/Characters/Aria.md") relative to the
+ * Classifies a vault path ("Cannon VTT/Characters/Aria.md") relative to the
  * root folder. Returns null for anything that isn't one of the app's notes.
  */
 export function classifyPath(rootFolder: string, path: string): Classified | null {

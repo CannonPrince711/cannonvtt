@@ -80,7 +80,7 @@ export function Wizard(): React.JSX.Element {
 
         <div className="mt-10 flex items-center justify-between text-xs text-muted-foreground">
           <span className="flex items-center gap-1.5">
-            <Logo className="size-3.5 text-gold" /> DND Tavern
+            <Logo className="size-3.5 text-gold" /> Cannon VTT
           </span>
           <button
             type="button"

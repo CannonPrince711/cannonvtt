@@ -61,7 +61,7 @@ export interface ComfyNodeSummary {
 }
 
 export interface ComfyWorkflowInfo {
-  /** File name inside %APPDATA%\DND Tavern\workflows\ (or vault path). */
+  /** File name inside %APPDATA%\Cannon VTT\workflows\ (or vault path). */
   file: string
   nodes: ComfyNodeSummary[]
   /** Best guess at which node inputs receive the prompt, seed, size… */

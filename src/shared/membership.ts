@@ -7,7 +7,7 @@
 import { CAMPAIGN_FILE, FOLDERS } from './layout'
 import { joinVaultPath, toWikilink, wikilinkTarget } from './names'
 
-/** "[[DND Tavern/Campaigns/Frost/Campaign|Frost]]", "Campaigns/Frost" or "Frost" → the campaign folder. */
+/** "[[Cannon VTT/Campaigns/Frost/Campaign|Frost]]", "Campaigns/Frost" or "Frost" → the campaign folder. */
 export function campaignFolderFromLink(link: string, rootFolder: string): string | null {
   const target = wikilinkTarget(link).replace(/\.md$/i, '')
   if (!target) return null

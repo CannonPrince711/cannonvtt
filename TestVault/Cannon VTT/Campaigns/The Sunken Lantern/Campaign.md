@@ -1,7 +1,7 @@
 ---
 name: The Sunken Lantern
 lorebooks:
-  - "[[DND Tavern/Lorebooks/Saltmere Lore|Saltmere Lore]]"
+  - "[[Cannon VTT/Lorebooks/Saltmere Lore|Saltmere Lore]]"
 ---
 
 ## Session recaps
@@ -11,7 +11,7 @@ lorebooks:
 Aria reached Saltmere and learned of the Drowned Bell.
 - Who is the hooded woman?
 
-Source: [[DND Tavern/Campaigns/The Sunken Lantern/Sessions/2026-10-10 The Lantern Pier|The Lantern Pier]]
+Source: [[Cannon VTT/Campaigns/The Sunken Lantern/Sessions/2026-10-10 The Lantern Pier|The Lantern Pier]]
 
 
 ### The Lantern Pier (2026-10-11)
@@ -19,4 +19,4 @@ Source: [[DND Tavern/Campaigns/The Sunken Lantern/Sessions/2026-10-10 The Lanter
 Aria reached Saltmere and learned of the Drowned Bell.
 - Who is the hooded woman?
 
-Source: [[DND Tavern/Campaigns/The Sunken Lantern/Sessions/2026-10-10 The Lantern Pier|The Lantern Pier]]
+Source: [[Cannon VTT/Campaigns/The Sunken Lantern/Sessions/2026-10-10 The Lantern Pier|The Lantern Pier]]

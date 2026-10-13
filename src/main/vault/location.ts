@@ -16,5 +16,5 @@ export function vaultInInstallFolder(vaultPath: string, rootFolder: string, inst
 }
 
 export function installFolderWarning(installFolder: string): string {
-  return `DND Tavern’s install folder (${installFolder}) is replaced on every update, which would delete your campaigns. Choose a vault folder outside it, such as Documents\\DND Vault.`
+  return `Cannon VTT’s install folder (${installFolder}) is replaced on every update, which would delete your campaigns. Choose a vault folder outside it, such as Documents\\DND Vault.`
 }

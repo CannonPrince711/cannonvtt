@@ -109,7 +109,7 @@ export async function createMainWindow(appearance: Appearance): Promise<BrowserW
     minWidth: MIN_SIZE.width,
     minHeight: MIN_SIZE.height,
     show: false,
-    title: 'DND Tavern',
+    title: 'Cannon VTT',
     // Packaged Windows builds take the icon from the .exe; Linux and dev builds need it explicitly.
     ...(app.isPackaged && process.platform === 'win32' ? {} : { icon: app.isPackaged ? join(process.resourcesPath, 'icon.png') : join(__dirname, '../../resources/icon.png') }),
     // A hidden title bar plus the overlay keeps the native caption buttons, so

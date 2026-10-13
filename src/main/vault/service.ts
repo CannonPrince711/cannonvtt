@@ -45,7 +45,7 @@ class VaultService extends EventEmitter<ServiceEvents> {
     if (!rootFolder) throw new AppError('VAULT_ROOT', `“${rootFolderInput}” is not a valid folder name.`)
     const check = await validateVault(vaultPath)
     if (!check.exists) throw new AppError('VAULT_MISSING', `The folder “${vaultPath}” does not exist.`)
-    if (!check.writable) throw new AppError('VAULT_READONLY', `DND Tavern cannot write to “${vaultPath}”.`)
+    if (!check.writable) throw new AppError('VAULT_READONLY', `Cannon VTT cannot write to “${vaultPath}”.`)
 
     await this.close()
     const vault = new Vault({ vaultPath, rootFolder, trash: (abs) => this.trash(abs), onWrite: (path, content, created) => this.emit('write', { path, content, created }) })

@@ -54,7 +54,7 @@ export function GeneralSection(): React.JSX.Element {
             </Button>
           </div>
         </Field>
-        <Field label="Folder inside the vault" htmlFor="g-root" description="DND Tavern only writes inside this folder and never touches .obsidian/.">
+        <Field label="Folder inside the vault" htmlFor="g-root" description="Cannon VTT only writes inside this folder and never touches .obsidian/.">
           <Input id="g-root" value={rootFolder} onChange={(e) => setRootFolder(e.target.value)} />
         </Field>
         <div className="flex items-center justify-between py-3">
@@ -99,7 +99,7 @@ export function GeneralSection(): React.JSX.Element {
       </SettingsGroup>
 
       <SettingsGroup title="Behaviour">
-        <Field inline label="Launch on startup" description="Start DND Tavern when you sign in to Windows.">
+        <Field inline label="Launch on startup" description="Start Cannon VTT when you sign in to Windows.">
           <Switch aria-label="Launch on startup" checked={settings.behavior.launchOnStartup} onCheckedChange={(v) => void updateSettings({ behavior: { launchOnStartup: v } })} />
         </Field>
         <Field inline label="Minimise to tray" description="Shows an icon in the notification area; closing the window hides it there instead of quitting. Quit from the icon’s menu.">
@@ -255,7 +255,7 @@ export function SecuritySection(): React.JSX.Element {
           <Switch aria-label="Warn about unencrypted connections" checked={settings.security.warnInsecureHttp} onCheckedChange={(v) => void updateSettings({ security: { warnInsecureHttp: v } })} />
         </Field>
         <div className="space-y-1.5 py-3 text-xs leading-relaxed text-muted-foreground">
-          <p>• DND Tavern opens no network port. The window talks to the app only over internal IPC.</p>
+          <p>• Cannon VTT opens no network port. The window talks to the app only over internal IPC.</p>
           <p>• API keys are encrypted with {keyStorageName()}, stay in the background process, and are masked in errors and the prompt inspector.</p>
           <p>• Links in messages open in your browser only if they are https: or obsidian: links.</p>
         </div>

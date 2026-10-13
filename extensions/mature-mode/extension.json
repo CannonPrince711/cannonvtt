@@ -3,7 +3,7 @@
   "name": "Mature Mode (18+)",
   "version": "1.1.0",
   "description": "Opt-in adult content for stories between consenting adult characters, with its own stat blocks (arousal, affection, stamina…) tracked per character, and the adults-only rule the campaign builder uses. Confirm you are 18+ in its panel before it does anything.",
-  "author": "DND Tavern",
+  "author": "Cannon VTT",
   "permissions": [],
   "commands": [
     { "name": "mature", "description": "Confirm you are 18+ and turn mature mode on or off", "usage": "/mature confirm | on | off" },

@@ -3,9 +3,9 @@ import { buildGraph, extractLinks, findMentions, makeResolver, neighbourhood } f
 
 describe('graph links', () => {
   it('extracts note links, skipping image embeds', () => {
-    expect(extractLinks('See [[Saltmere]], [[DND Tavern/NPCs/Pell|Pell]] and [[Notes#Heading]]. ![[map.png]] ![[Embedded note]]')).toEqual([
+    expect(extractLinks('See [[Saltmere]], [[Cannon VTT/NPCs/Pell|Pell]] and [[Notes#Heading]]. ![[map.png]] ![[Embedded note]]')).toEqual([
       'Saltmere',
-      'DND Tavern/NPCs/Pell',
+      'Cannon VTT/NPCs/Pell',
       'Notes',
       'Embedded note'
     ])
@@ -27,19 +27,19 @@ describe('graph links', () => {
 })
 
 describe('buildGraph', () => {
-  const root = 'DND Tavern'
+  const root = 'Cannon VTT'
   const files = [
-    { path: 'DND Tavern/Campaigns/Saltmere/Campaign.md', content: '---\nlorebooks: ["[[DND Tavern/Lorebooks/Lore]]"]\n---\nSee [[Pell Brightwater]].' },
-    { path: 'DND Tavern/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md', content: '---\ncampaign: "[[DND Tavern/Campaigns/Saltmere/Campaign|Saltmere]]"\ncharacters: ["[[DND Tavern/Characters/Aria|Aria]]"]\n---\n> [!dm] DM\n> Mother Ysolde lifts the lantern. Aria nods.\n![[scene.png]]' },
-    { path: 'DND Tavern/Characters/Aria.md', content: '# Aria' },
-    { path: 'DND Tavern/NPCs/Pell Brightwater.md', content: 'Met at [[Daily/2026-10-10]].' },
-    { path: 'DND Tavern/NPCs/Mother Ysolde.md', content: '' },
-    { path: 'DND Tavern/Lorebooks/Lore.md', content: '' }
+    { path: 'Cannon VTT/Campaigns/Saltmere/Campaign.md', content: '---\nlorebooks: ["[[Cannon VTT/Lorebooks/Lore]]"]\n---\nSee [[Pell Brightwater]].' },
+    { path: 'Cannon VTT/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md', content: '---\ncampaign: "[[Cannon VTT/Campaigns/Saltmere/Campaign|Saltmere]]"\ncharacters: ["[[Cannon VTT/Characters/Aria|Aria]]"]\n---\n> [!dm] DM\n> Mother Ysolde lifts the lantern. Aria nods.\n![[scene.png]]' },
+    { path: 'Cannon VTT/Characters/Aria.md', content: '# Aria' },
+    { path: 'Cannon VTT/NPCs/Pell Brightwater.md', content: 'Met at [[Daily/2026-10-10]].' },
+    { path: 'Cannon VTT/NPCs/Mother Ysolde.md', content: '' },
+    { path: 'Cannon VTT/Lorebooks/Lore.md', content: '' }
   ]
   const allPaths = [...files.map((f) => f.path), 'Daily/2026-10-10.md']
   const labels = new Map([
-    ['DND Tavern/Campaigns/Saltmere/Campaign.md', 'Saltmere'],
-    ['DND Tavern/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md', 'Session 01']
+    ['Cannon VTT/Campaigns/Saltmere/Campaign.md', 'Saltmere'],
+    ['Cannon VTT/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md', 'Session 01']
   ])
   const g = buildGraph({ rootFolder: root, allPaths, files, labels })
 
@@ -65,12 +65,12 @@ describe('buildGraph', () => {
   })
 
   it('computes neighbourhoods for the local graph', () => {
-    const session = 'DND Tavern/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md'
+    const session = 'Cannon VTT/Campaigns/Saltmere/Sessions/2026-10-10 Session 01.md'
     const one = neighbourhood(g, session, 1)
-    expect(one.has('DND Tavern/Characters/Aria.md')).toBe(true)
-    expect(one.has('DND Tavern/NPCs/Pell Brightwater.md')).toBe(false)
-    expect(neighbourhood(g, session, 2).has('DND Tavern/NPCs/Pell Brightwater.md')).toBe(true)
-    expect(neighbourhood(g, session, 1, new Set(['link'])).has('DND Tavern/NPCs/Mother Ysolde.md')).toBe(false)
+    expect(one.has('Cannon VTT/Characters/Aria.md')).toBe(true)
+    expect(one.has('Cannon VTT/NPCs/Pell Brightwater.md')).toBe(false)
+    expect(neighbourhood(g, session, 2).has('Cannon VTT/NPCs/Pell Brightwater.md')).toBe(true)
+    expect(neighbourhood(g, session, 1, new Set(['link'])).has('Cannon VTT/NPCs/Mother Ysolde.md')).toBe(false)
   })
 })
 

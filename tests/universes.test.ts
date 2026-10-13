@@ -16,16 +16,16 @@ import {
 import { VaultIndexer } from '../src/main/vault/indexer'
 import { Vault } from '../src/main/vault/vault'
 
-const ROOT = 'DND Tavern'
-const SHATTER = 'DND Tavern/Universes/Shattered Realms'
+const ROOT = 'Cannon VTT'
+const SHATTER = 'Cannon VTT/Universes/Shattered Realms'
 
 describe('universe links', () => {
   it('reads universe folders from links in any form', () => {
     expect(universeFolderFromLink(universeLink(SHATTER, 'Shattered Realms'), ROOT)).toBe(SHATTER)
     expect(universeFolderFromLink('Universes/Shattered Realms/Universe', ROOT)).toBe(SHATTER)
     expect(universeFolderFromLink('Shattered Realms', ROOT)).toBe(SHATTER)
-    expect(isUniverseLink('[[DND Tavern/Universes/Shattered Realms/Universe|Shattered Realms]]')).toBe(true)
-    expect(isUniverseLink('[[DND Tavern/Campaigns/Frost/Campaign|Frost]]')).toBe(false)
+    expect(isUniverseLink('[[Cannon VTT/Universes/Shattered Realms/Universe|Shattered Realms]]')).toBe(true)
+    expect(isUniverseLink('[[Cannon VTT/Campaigns/Frost/Campaign|Frost]]')).toBe(false)
   })
 
   it('classifies universe notes', () => {
@@ -55,11 +55,11 @@ describe('campaigns in a universe', () => {
 
   it('counts NPCs that link to the universe in all its campaigns', () => {
     const campaigns = [
-      { folder: 'DND Tavern/Campaigns/Skyport', links: [], universe: SHATTER },
-      { folder: 'DND Tavern/Campaigns/Deeps', links: [], universe: SHATTER },
-      { folder: 'DND Tavern/Campaigns/Frost', links: [] }
+      { folder: 'Cannon VTT/Campaigns/Skyport', links: [], universe: SHATTER },
+      { folder: 'Cannon VTT/Campaigns/Deeps', links: [], universe: SHATTER },
+      { folder: 'Cannon VTT/Campaigns/Frost', links: [] }
     ]
-    expect(npcCampaigns('DND Tavern/NPCs/Queen.md', [`${SHATTER}/Universe`], campaigns)).toEqual(['DND Tavern/Campaigns/Skyport', 'DND Tavern/Campaigns/Deeps'])
+    expect(npcCampaigns('Cannon VTT/NPCs/Queen.md', [`${SHATTER}/Universe`], campaigns)).toEqual(['Cannon VTT/Campaigns/Skyport', 'Cannon VTT/Campaigns/Deeps'])
   })
 
   it('reads an AI universe and drops a ruleset it does not know', () => {
@@ -81,15 +81,15 @@ describe('indexing universes', () => {
 
   it('expands a character added to a universe into its campaigns', async () => {
     await vault.write(`${SHATTER}/Universe.md`, '---\ntype: universe\nname: Shattered Realms\nruleset: pf2e\n---\n', { baseHash: null })
-    await vault.write('DND Tavern/Campaigns/Skyport/Campaign.md', '---\nname: Skyport\nuniverse: "[[DND Tavern/Universes/Shattered Realms/Universe|Shattered Realms]]"\n---\n', { baseHash: null })
-    await vault.write('DND Tavern/Campaigns/Frost/Campaign.md', '---\nname: Frost\n---\n', { baseHash: null })
-    await vault.write('DND Tavern/Characters/Vex.md', '---\nname: Vex\ncampaigns:\n  - "[[DND Tavern/Universes/Shattered Realms/Universe|Shattered Realms]]"\n---\n', { baseHash: null })
+    await vault.write('Cannon VTT/Campaigns/Skyport/Campaign.md', '---\nname: Skyport\nuniverse: "[[Cannon VTT/Universes/Shattered Realms/Universe|Shattered Realms]]"\n---\n', { baseHash: null })
+    await vault.write('Cannon VTT/Campaigns/Frost/Campaign.md', '---\nname: Frost\n---\n', { baseHash: null })
+    await vault.write('Cannon VTT/Characters/Vex.md', '---\nname: Vex\ncampaigns:\n  - "[[Cannon VTT/Universes/Shattered Realms/Universe|Shattered Realms]]"\n---\n', { baseHash: null })
     const indexer = new VaultIndexer(vault, { vaultName: 'Test', isObsidianVault: true })
     await indexer.build()
     const index = indexer.snapshot()
     expect(index.universes).toMatchObject([{ folder: SHATTER, displayName: 'Shattered Realms', ruleset: 'pf2e' }])
     expect(index.campaigns.find((c) => c.displayName === 'Skyport')?.universe).toBe(SHATTER)
-    expect(index.characters[0]?.campaigns).toEqual(['DND Tavern/Campaigns/Skyport'])
+    expect(index.characters[0]?.campaigns).toEqual(['Cannon VTT/Campaigns/Skyport'])
     expect(index.characters[0]).not.toHaveProperty('universes')
   })
 })

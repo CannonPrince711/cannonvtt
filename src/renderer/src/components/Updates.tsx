@@ -23,14 +23,14 @@ export function useUpdatesSync(): void {
   }, [])
 }
 
-const RELEASES_URL = 'https://github.com/CannonPrince711/cannontavern/releases'
+const RELEASES_URL = 'https://github.com/CannonPrince711/cannonvtt/releases'
 
 /** "update" checks, and when a new version can install itself, downloads it straight away. */
 async function run(action: 'check' | 'update' | 'download' | 'install'): Promise<void> {
   try {
     if (action === 'check' || action === 'update') {
       const s = await invoke('updates:check')
-      if (s.state === 'none') toast.success('DND Tavern is up to date')
+      if (s.state === 'none') toast.success('Cannon VTT is up to date')
       if (action === 'update' && s.state === 'available' && s.canInstall) await invoke('updates:download')
     } else if (action === 'download') await invoke('updates:download')
     else await invoke('updates:install')
@@ -46,7 +46,7 @@ export function UpdatePill(): React.JSX.Element | null {
   const status = useUpdates((s) => s.status)
   if (status.state === 'available') {
     return (
-      <Tip label={status.canInstall ? `Download DND Tavern ${status.version}` : `Open the download page for ${status.version}`}>
+      <Tip label={status.canInstall ? `Download Cannon VTT ${status.version}` : `Open the download page for ${status.version}`}>
         <button
           type="button"
           onClick={() => void run('download')}
@@ -66,7 +66,7 @@ export function UpdatePill(): React.JSX.Element | null {
   }
   if (status.state === 'ready') {
     return (
-      <Tip label="Restart DND Tavern to finish updating">
+      <Tip label="Restart Cannon VTT to finish updating">
         <button
           type="button"
           onClick={() => void run('install')}
@@ -154,7 +154,7 @@ export function UpdatesSettings(): React.JSX.Element {
       <div className="pane flex flex-wrap items-center gap-4 rounded-xl border p-5">
         <ArrowDownCircle className={cn('size-9 shrink-0', status.state === 'available' || status.state === 'ready' ? 'text-gold' : 'text-muted-foreground')} />
         <div className="min-w-0 flex-1">
-          <p className="font-display text-lg font-semibold tracking-wide">DND Tavern {version ?? ''}</p>
+          <p className="font-display text-lg font-semibold tracking-wide">Cannon VTT {version ?? ''}</p>
           <p className={cn('mt-0.5 text-sm', status.state === 'error' ? 'text-crimson' : 'text-muted-foreground')} role="status">
             {status.state === 'none' && <CheckCircle2 className="mr-1.5 inline size-4 text-emerald" />}
             {status.state === 'error' && <AlertTriangle className="mr-1.5 inline size-4" />}

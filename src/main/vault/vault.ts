@@ -39,7 +39,7 @@ export class VaultConflictError extends AppError {
   ) {
     super(
       'VAULT_CONFLICT',
-      `“${path}” was changed outside DND Tavern since it was loaded.`,
+      `“${path}” was changed outside Cannon VTT since it was loaded.`,
       'Reload the note to see the other changes, or overwrite them.'
     )
   }
@@ -87,7 +87,7 @@ export class Vault {
     const parts = norm.split('/')
     if (!norm || parts.includes('..')) throw new AppError('VAULT_PATH', `Invalid vault path: ${path}`)
     if (parts[0]?.toLowerCase() === '.obsidian') {
-      throw new AppError('VAULT_PATH', 'DND Tavern never reads or writes .obsidian/.')
+      throw new AppError('VAULT_PATH', 'Cannon VTT never reads or writes .obsidian/.')
     }
     const abs = resolve(this.root, ...parts)
     const rel = relative(this.root, abs)
@@ -112,7 +112,7 @@ export class Vault {
   }
 
   isInRoot(path: VaultPath): boolean {
-    // Windows and macOS ignore case in paths; on Linux "dnd tavern" is another folder.
+    // Windows and macOS ignore case in paths; on Linux "cannon vtt" is another folder.
     const fold = (s: string): string => (CASE_INSENSITIVE ? s.toLowerCase() : s)
     const p = fold(joinVaultPath(path))
     const r = fold(this.rootFolder)
@@ -121,7 +121,7 @@ export class Vault {
 
   private assertWritable(path: VaultPath): string {
     if (!this.isInRoot(path)) {
-      throw new AppError('VAULT_READONLY', `DND Tavern only writes inside “${this.rootFolder}/”.`, path)
+      throw new AppError('VAULT_READONLY', `Cannon VTT only writes inside “${this.rootFolder}/”.`, path)
     }
     return this.resolve(path)
   }

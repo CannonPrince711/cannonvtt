@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { campaignFolderFromLink, campaignLink, forCampaign, fromOtherCampaigns, inCampaign } from '../src/shared/membership'
 
-const ROOT = 'DND Tavern'
-const FROST = 'DND Tavern/Campaigns/Frostborn'
-const TRIAD = 'DND Tavern/Campaigns/Triad Accord'
+const ROOT = 'Cannon VTT'
+const FROST = 'Cannon VTT/Campaigns/Frostborn'
+const TRIAD = 'Cannon VTT/Campaigns/Triad Accord'
 
 describe('campaign membership', () => {
   it('reads campaign folders from links in any form', () => {
-    expect(campaignFolderFromLink('[[DND Tavern/Campaigns/Frostborn/Campaign|Frostborn]]', ROOT)).toBe(FROST)
+    expect(campaignFolderFromLink('[[Cannon VTT/Campaigns/Frostborn/Campaign|Frostborn]]', ROOT)).toBe(FROST)
     expect(campaignFolderFromLink('Campaigns/Frostborn/Campaign', ROOT)).toBe(FROST)
     expect(campaignFolderFromLink('[[Frostborn]]', ROOT)).toBe(FROST)
     expect(campaignFolderFromLink('', ROOT)).toBeNull()
@@ -15,7 +15,7 @@ describe('campaign membership', () => {
 
   it('writes a link that reads back to the same folder', () => {
     const link = campaignLink(TRIAD, 'Triad Accord')
-    expect(link).toBe('[[DND Tavern/Campaigns/Triad Accord/Campaign|Triad Accord]]')
+    expect(link).toBe('[[Cannon VTT/Campaigns/Triad Accord/Campaign|Triad Accord]]')
     expect(campaignFolderFromLink(link, ROOT)).toBe(TRIAD)
   })
 

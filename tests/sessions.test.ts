@@ -13,7 +13,7 @@ let vault: Vault
 
 beforeEach(async () => {
   dir = await mkdtemp(join(tmpdir(), 'dnd-sessions-'))
-  vault = new Vault({ vaultPath: dir, rootFolder: 'DND Tavern' })
+  vault = new Vault({ vaultPath: dir, rootFolder: 'Cannon VTT' })
 })
 afterEach(() => rm(dir, { recursive: true, force: true }))
 
@@ -22,7 +22,7 @@ const msg = (id: string, role: Message['role'], text: string): Message => ({ id,
 describe('campaigns and characters', () => {
   it('creates a campaign folder with Campaign.md, Party.md, Sessions/ and Images/', async () => {
     const c = await createCampaign(vault, 'The Sunken Lantern', { setting: 'A drowned city' })
-    expect(c.path).toBe('DND Tavern/Campaigns/The Sunken Lantern')
+    expect(c.path).toBe('Cannon VTT/Campaigns/The Sunken Lantern')
     const { campaign, party } = await readCampaign(vault, c.path)
     expect(campaign).toMatchObject({ name: 'The Sunken Lantern', setting: 'A drowned city' })
     expect(party.gold).toBe(0)
@@ -32,7 +32,7 @@ describe('campaigns and characters', () => {
 
   it('creates and saves characters, keeping keys added in Obsidian', async () => {
     const note = await createCharacter(vault, 'Aria: the Grey?')
-    expect(note.path).toBe('DND Tavern/Characters/Aria the Grey.md')
+    expect(note.path).toBe('Cannon VTT/Characters/Aria the Grey.md')
     // The user adds an alias and a comment in Obsidian.
     const abs = vault.resolve(note.path)
     const raw = await readFile(abs, 'utf8')
@@ -60,10 +60,10 @@ describe('session notes', () => {
 
   it('creates a numbered session with wikilinks and the greeting', async () => {
     const path = await setup()
-    expect(path).toMatch(/^DND Tavern\/Campaigns\/Lantern\/Sessions\/\d{4}-\d{2}-\d{2} Session 01\.md$/)
+    expect(path).toMatch(/^Cannon VTT\/Campaigns\/Lantern\/Sessions\/\d{4}-\d{2}-\d{2} Session 01\.md$/)
     const s = await readSession(vault, path)
-    expect(s.frontmatter.campaign).toBe('[[DND Tavern/Campaigns/Lantern/Campaign|Lantern]]')
-    expect(s.campaignPath).toBe('DND Tavern/Campaigns/Lantern')
+    expect(s.frontmatter.campaign).toBe('[[Cannon VTT/Campaigns/Lantern/Campaign|Lantern]]')
+    expect(s.campaignPath).toBe('Cannon VTT/Campaigns/Lantern')
     expect(s.messages.map((m) => [m.role, m.text])).toEqual([['dm', 'The fog rolls in.']])
   })
 
@@ -120,7 +120,7 @@ describe('session notes', () => {
   it('numbers the next session after existing ones', async () => {
     const c = await createCampaign(vault, 'Two')
     await createSession(vault, { campaignPath: c.path, dateFormat: 'YYYY-MM-DD' })
-    await mkdir(join(dir, 'DND Tavern', 'Campaigns', 'Two', 'Sessions'), { recursive: true })
+    await mkdir(join(dir, 'Cannon VTT', 'Campaigns', 'Two', 'Sessions'), { recursive: true })
     const second = await createSession(vault, { campaignPath: c.path, dateFormat: 'YYYY-MM-DD' })
     expect(second.frontmatter.title).toBe('Session 02')
   })

@@ -14,7 +14,7 @@ export function VaultStep({ next, back }: StepProps): React.JSX.Element {
   const setIndex = useVault((s) => s.setIndex)
   const [detected, setDetected] = useState<DetectedVault[] | null>(null)
   const [path, setPath] = useState(settings?.vault.path ?? '')
-  const [rootFolder, setRootFolder] = useState(settings?.vault.rootFolder ?? 'DND Tavern')
+  const [rootFolder, setRootFolder] = useState(settings?.vault.rootFolder ?? 'Cannon VTT')
   const [validation, setValidation] = useState<VaultValidation | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -62,7 +62,7 @@ export function VaultStep({ next, back }: StepProps): React.JSX.Element {
   return (
     <div>
       <StepHeader title="Choose your vault">
-        DND Tavern keeps everything as notes in an Obsidian vault. Pick one below, or any folder. Settings and API keys stay
+        Cannon VTT keeps everything as notes in an Obsidian vault. Pick one below, or any folder. Settings and API keys stay
         outside the vault.
       </StepHeader>
 
@@ -112,7 +112,7 @@ export function VaultStep({ next, back }: StepProps): React.JSX.Element {
             <Label htmlFor="root-folder">Folder inside the vault</Label>
             <Input id="root-folder" value={rootFolder} onChange={(e) => setRootFolder(e.target.value)} />
             <p className="text-[11px] text-muted-foreground">
-              Created if it doesn’t exist. DND Tavern only writes inside this folder.
+              Created if it doesn’t exist. Cannon VTT only writes inside this folder.
             </p>
           </div>
         </div>
@@ -147,7 +147,7 @@ function ValidationLine({ v }: { v: VaultValidation | null }): React.JSX.Element
   if (!v.writable)
     return (
       <p className="mt-1.5 flex items-center gap-1.5 text-xs text-destructive">
-        <XCircle className="size-3.5" /> DND Tavern can’t write to this folder.
+        <XCircle className="size-3.5" /> Cannon VTT can’t write to this folder.
       </p>
     )
   if (!v.isObsidianVault)

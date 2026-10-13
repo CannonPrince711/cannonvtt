@@ -30,7 +30,7 @@ import { setLaunchOnStartup } from './autostart'
 import { recapService } from './recap'
 import { applyAppearance, createMainWindow, getMainWindow } from './window'
 
-app.setAppUserModelId('com.dndtavern.app')
+app.setAppUserModelId('com.cannonvtt.app')
 
 // Dev runs get their own profile so they never share settings or the
 // single-instance lock with an installed copy.
@@ -107,7 +107,7 @@ if (!app.requestSingleInstanceLock()) {
       void dialog.showMessageBox(win, {
         type: 'warning',
         title: 'Move your vault',
-        message: 'Your vault is inside DND Tavern’s install folder.',
+        message: 'Your vault is inside Cannon VTT’s install folder.',
         detail: `${installFolderWarning(installFolder)} Open Settings → General → Vault to move it.`
       })
     }

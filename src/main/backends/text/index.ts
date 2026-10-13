@@ -81,7 +81,7 @@ function contextNotice(server: ServerContext, setting: number): string {
     return `This model was trained on ${n(server.tokens)} tokens of context. Ollama will load the ${n(setting)} you set, but replies may get worse past ${n(server.tokens)}.`
   }
   const flag = { KoboldCpp: '--contextsize', 'llama.cpp': '--ctx-size', vLLM: '--max-model-len', Ollama: '' }[server.server]
-  return `The server loaded a context window of ${n(server.tokens)} tokens, less than this backend’s Context size (${n(setting)}), so DND Tavern will fit prompts into ${n(server.tokens)}. To get more, restart ${server.server} with a bigger ${flag} (e.g. ${flag} ${Math.min(server.tokens * 2, setting)}), then set Context size to match.`
+  return `The server loaded a context window of ${n(server.tokens)} tokens, less than this backend’s Context size (${n(setting)}), so Cannon VTT will fit prompts into ${n(server.tokens)}. To get more, restart ${server.server} with a bigger ${flag} (e.g. ${flag} ${Math.min(server.tokens * 2, setting)}), then set Context size to match.`
 }
 
 /** The request as the prompt inspector shows it: every secret masked. */

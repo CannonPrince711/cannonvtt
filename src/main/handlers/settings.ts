@@ -19,7 +19,7 @@ import { exportSecret, storeImageBackend, storeTextBackend } from '../backends/s
 import { paths } from '../paths'
 import { getMainWindow } from '../window'
 
-const EXPORT_FORMAT = 'dnd-tavern-settings'
+const EXPORT_FORMAT = 'cannon-vtt-settings'
 
 /** Settings in the file format: keys only when asked for, otherwise "keep this PC's key". */
 function settingsFile(s: Settings, includeKeys: boolean): Record<string, unknown> {
@@ -58,7 +58,7 @@ export function registerSettingsHandlers(): void {
       const win = getMainWindow()
       const opts: Electron.SaveDialogOptions = {
         title: 'Save settings',
-        defaultPath: join(app.getPath('documents'), 'dnd-tavern-settings.json'),
+        defaultPath: join(app.getPath('documents'), 'cannon-vtt-settings.json'),
         filters: [{ name: 'JSON', extensions: ['json'] }]
       }
       const result = win ? await dialog.showSaveDialog(win, opts) : await dialog.showSaveDialog(opts)
@@ -89,7 +89,7 @@ export function registerSettingsHandlers(): void {
       throw new AppError('IMPORT_INVALID', 'That file is not valid JSON.')
     }
     if (json.format !== EXPORT_FORMAT || !json.settings) {
-      throw new AppError('IMPORT_INVALID', 'That file is not a DND Tavern settings export.')
+      throw new AppError('IMPORT_INVALID', 'That file is not a Cannon VTT settings export.')
     }
     const raw = json.settings
     // Older exports without keys wrote "none" for a stored key; read that as "keep this PC's key".

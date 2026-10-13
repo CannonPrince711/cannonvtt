@@ -18,10 +18,10 @@ describe('rulesets', () => {
   })
 
   it('resolves campaign values to ids or note paths', () => {
-    expect(rulesetRef('pf2e', 'DND Tavern')).toBe('pf2e')
-    expect(rulesetRef('[[DND Tavern/Rulesets/Neon Streets|Neon Streets]]', 'DND Tavern')).toBe('DND Tavern/Rulesets/Neon Streets.md')
-    expect(rulesetRef('Neon Streets', 'DND Tavern')).toBe('DND Tavern/Rulesets/Neon Streets.md')
-    expect(rulesetRef('', 'DND Tavern')).toBeUndefined()
+    expect(rulesetRef('pf2e', 'Cannon VTT')).toBe('pf2e')
+    expect(rulesetRef('[[Cannon VTT/Rulesets/Neon Streets|Neon Streets]]', 'Cannon VTT')).toBe('Cannon VTT/Rulesets/Neon Streets.md')
+    expect(rulesetRef('Neon Streets', 'Cannon VTT')).toBe('Cannon VTT/Rulesets/Neon Streets.md')
+    expect(rulesetRef('', 'Cannon VTT')).toBeUndefined()
   })
 
   it('round-trips a custom ruleset through its note', () => {
@@ -39,8 +39,8 @@ describe('rulesets', () => {
     })
     expect(body).toContain('Street Cred buys favours.')
     expect(body).not.toContain('Rules: Neon Streets.')
-    const r = rulesetFromNote('DND Tavern/Rulesets/Neon Streets.md', data, body)
-    expect(r).toMatchObject({ id: 'DND Tavern/Rulesets/Neon Streets.md', name: 'Neon Streets', custom: true, math: false, classes: ['Netrunner', 'Fixer'] })
+    const r = rulesetFromNote('Cannon VTT/Rulesets/Neon Streets.md', data, body)
+    expect(r).toMatchObject({ id: 'Cannon VTT/Rulesets/Neon Streets.md', name: 'Neon Streets', custom: true, math: false, classes: ['Netrunner', 'Fixer'] })
     expect(r.rules).toMatch(/^Rules: Neon Streets\. Roll d20 \+ skill vs DC\. Street Cred buys favours\. Always ask for checks exactly as \[CHECK/)
     expect(r.terms.spells).toBe('Programs')
     // Saving again doesn't pile up the app's check line.

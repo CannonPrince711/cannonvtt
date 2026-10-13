@@ -17,7 +17,7 @@ import { openExternalSafe } from './security'
 import { settingsStore } from './settings-store'
 import { getMainWindow } from './window'
 
-export const RELEASES_REPO = 'CannonPrince711/cannontavern'
+export const RELEASES_REPO = 'CannonPrince711/cannonvtt'
 const RELEASES_URL = `https://github.com/${RELEASES_REPO}/releases/latest`
 
 function friendly(err: unknown): string {
@@ -80,7 +80,7 @@ class Updater {
     })
     autoUpdater.on('update-downloaded', (info) => {
       this.set({ state: 'ready', version: info.version, partial: this.partial, downloadedBytes: this.lastTotal || undefined, fullBytes: this.fullBytes })
-      send(getMainWindow(), 'toast', { level: 'success', title: `DND Tavern ${info.version} is ready`, detail: 'Restart to update now, or it installs when you quit.' })
+      send(getMainWindow(), 'toast', { level: 'success', title: `Cannon VTT ${info.version} is ready`, detail: 'Restart to update now, or it installs when you quit.' })
     })
     autoUpdater.on('error', (err) => this.set({ state: 'error', message: friendly(err) }))
   }
@@ -110,7 +110,7 @@ class Updater {
         const s = this.status
         send(getMainWindow(), 'toast', {
           level: 'info',
-          title: `DND Tavern ${s.version} is available`,
+          title: `Cannon VTT ${s.version} is available`,
           detail: s.canInstall ? 'Use the update button in the title bar to install it.' : `You have ${app.getVersion()}.`,
           ...(s.canInstall ? {} : { link: { label: 'Open the download page', url: s.url ?? RELEASES_URL } })
         })
@@ -132,7 +132,7 @@ class Updater {
       {
         url: `https://api.github.com/repos/${RELEASES_REPO}/releases/latest`,
         method: 'GET',
-        headers: { accept: 'application/vnd.github+json', 'user-agent': `DND-Tavern/${app.getVersion()}` }
+        headers: { accept: 'application/vnd.github+json', 'user-agent': `Cannon-VTT/${app.getVersion()}` }
       }
     )
     const release = (await readJson(res, deadline)) as { tag_name?: string; html_url?: string; body?: string; draft?: boolean; prerelease?: boolean }

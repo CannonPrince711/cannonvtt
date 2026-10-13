@@ -13,7 +13,7 @@ const shared = resolve(__dirname, 'src/shared')
  */
 function devCsp(): Plugin {
   return {
-    name: 'dnd-tavern:dev-csp',
+    name: 'cannon-vtt:dev-csp',
     apply: 'serve',
     transformIndexHtml(html) {
       return html.replace("script-src 'self'", "script-src 'self' 'unsafe-inline'")

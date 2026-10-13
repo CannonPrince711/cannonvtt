@@ -148,7 +148,7 @@ export function TablePanel(): React.JSX.Element {
           </span>
         </label>
         {!session && <p className="text-xs text-muted-foreground">Open a session first.</p>}
-        {scope === 'network' && <p className="text-[11px] text-muted-foreground">Windows may ask whether DND Tavern can use the network; allow it for private networks.</p>}
+        {scope === 'network' && <p className="text-[11px] text-muted-foreground">Windows may ask whether Cannon VTT can use the network; allow it for private networks.</p>}
       </div>
     )
   }

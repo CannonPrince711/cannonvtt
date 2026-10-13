@@ -18,7 +18,7 @@ async function main() {
 
   const tag = `v${version}`
   const api = `https://api.github.com/repos/${owner}/${repo}`
-  const headers = { authorization: `Bearer ${token}`, accept: 'application/vnd.github+json', 'user-agent': 'dnd-tavern-release' }
+  const headers = { authorization: `Bearer ${token}`, accept: 'application/vnd.github+json', 'user-agent': 'cannon-vtt-release' }
 
   // Drafts aren't found by tag, so look through the recent releases.
   const list = await fetch(`${api}/releases?per_page=50`, { headers })

@@ -61,7 +61,7 @@ export async function createSampleCampaign(vault: Vault, dateFormat: string): Pr
         house_rules: 'Milestone levelling. Healing potions take a bonus action. Critical hits roll double dice.',
         lorebooks: [toWikilink(lorePath, { full: true })]
       },
-      `\n# ${NAME}\n\nA beginner-friendly mystery for one player character, levels 1–3.\n\n## The hook\nMother Ysolde, the last lantern-keeper of Saltmere, has sent a letter asking for help: the Drowned Bell has started ringing again.\n\n## Secrets (for the DM)\n- The harbourmaster, **Corwin Hale**, rings the bell from a diving bell beneath the harbour to scare families into selling their stilt-houses cheaply.\n- Something older answered the bell. It has started taking the people who hear it.\n\nEdit this note in Obsidian; DND Tavern sends it to the DM with every prompt.\n`
+      `\n# ${NAME}\n\nA beginner-friendly mystery for one player character, levels 1–3.\n\n## The hook\nMother Ysolde, the last lantern-keeper of Saltmere, has sent a letter asking for help: the Drowned Bell has started ringing again.\n\n## Secrets (for the DM)\n- The harbourmaster, **Corwin Hale**, rings the bell from a diving bell beneath the harbour to scare families into selling their stilt-houses cheaply.\n- Something older answered the bell. It has started taking the people who hear it.\n\nEdit this note in Obsidian; Cannon VTT sends it to the DM with every prompt.\n`
     )
   )
 

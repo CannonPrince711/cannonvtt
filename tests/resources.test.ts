@@ -13,8 +13,8 @@ let vault: Vault
 
 beforeEach(async () => {
   dir = await mkdtemp(join(tmpdir(), 'dnd-resources-'))
-  vault = new Vault({ vaultPath: dir, rootFolder: 'DND Tavern' })
-  await vault.mkdir('DND Tavern')
+  vault = new Vault({ vaultPath: dir, rootFolder: 'Cannon VTT' })
+  await vault.mkdir('Cannon VTT')
 })
 
 afterEach(async () => {
@@ -23,11 +23,11 @@ afterEach(async () => {
 
 describe('shared Resources folder', () => {
   it('treats Resources/Lore notes as shared lorebooks', () => {
-    expect(classifyPath('DND Tavern', 'DND Tavern/Resources/Lore/Creatures.md')).toEqual({ kind: 'lorebook' })
-    expect(classifyPath('DND Tavern', 'DND Tavern/Resources/About Resources.md')).toBeNull()
-    expect(classifyPath('DND Tavern', 'DND Tavern/Resources/Images/Maps/x.md')).toBeNull()
-    expect(isSharedLorebook('DND Tavern', 'DND Tavern/Resources/Lore/Creatures.md')).toBe(true)
-    expect(isSharedLorebook('DND Tavern', 'DND Tavern/Lorebooks/Creatures.md')).toBe(false)
+    expect(classifyPath('Cannon VTT', 'Cannon VTT/Resources/Lore/Creatures.md')).toEqual({ kind: 'lorebook' })
+    expect(classifyPath('Cannon VTT', 'Cannon VTT/Resources/About Resources.md')).toBeNull()
+    expect(classifyPath('Cannon VTT', 'Cannon VTT/Resources/Images/Maps/x.md')).toBeNull()
+    expect(isSharedLorebook('Cannon VTT', 'Cannon VTT/Resources/Lore/Creatures.md')).toBe(true)
+    expect(isSharedLorebook('Cannon VTT', 'Cannon VTT/Lorebooks/Creatures.md')).toBe(false)
   })
 
   it('writes the starter lorebooks once, and indexes them as shared', async () => {
@@ -41,31 +41,31 @@ describe('shared Resources folder', () => {
 
   it('stays deleted once removed, and never overwrites an edited note', async () => {
     await ensureResources(vault)
-    const creatures = join(dir, 'DND Tavern', 'Resources', 'Lore', 'Creatures.md')
+    const creatures = join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Creatures.md')
     await writeFile(creatures, '---\ntype: lorebook\n---\n## My own\nkeys:: mine\n\nEdited.\n')
-    await rm(join(dir, 'DND Tavern', 'Resources', 'Lore', 'Townsfolk.md'))
+    await rm(join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Townsfolk.md'))
     await ensureResources(vault)
-    expect(await vault.exists('DND Tavern/Resources/Lore/Townsfolk.md')).toBe(false)
+    expect(await vault.exists('Cannon VTT/Resources/Lore/Townsfolk.md')).toBe(false)
     expect(await readFile(creatures, 'utf8')).toContain('Edited.')
     // Restoring on request brings back only what's missing.
     await createResources(vault)
-    expect(await vault.exists('DND Tavern/Resources/Lore/Townsfolk.md')).toBe(true)
+    expect(await vault.exists('Cannon VTT/Resources/Lore/Townsfolk.md')).toBe(true)
     expect(await readFile(creatures, 'utf8')).toContain('Edited.')
   })
 
   it('refreshes starter notes an update changed, unless the user edited or deleted them', async () => {
     await ensureResources(vault)
     const v2 = starterFiles().map((f) => ({ ...f, content: f.content.replace('Change prices to suit your world.', 'Prices updated.').replace('Small, cunning raiders', 'Sly raiders') }))
-    const creatures = join(dir, 'DND Tavern', 'Resources', 'Lore', 'Creatures.md')
-    const gear = join(dir, 'DND Tavern', 'Resources', 'Lore', 'Gear and Prices.md')
+    const creatures = join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Creatures.md')
+    const gear = join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Gear and Prices.md')
     await writeFile(creatures, '---\ntype: lorebook\n---\n## Mine\nkeys:: mine\n\nEdited.\n')
-    await rm(join(dir, 'DND Tavern', 'Resources', 'Lore', 'Townsfolk.md'))
+    await rm(join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Townsfolk.md'))
     const extra = { rel: 'Resources/Lore/Factions.md', content: '---\ntype: lorebook\nname: Factions\n---\n' }
     await ensureResources(vault, [...v2, extra])
     expect(await readFile(gear, 'utf8')).toContain('Prices updated.')
     expect(await readFile(creatures, 'utf8')).toContain('Edited.')
-    expect(await vault.exists('DND Tavern/Resources/Lore/Townsfolk.md')).toBe(false)
-    expect(await vault.exists('DND Tavern/Resources/Lore/Factions.md')).toBe(true)
+    expect(await vault.exists('Cannon VTT/Resources/Lore/Townsfolk.md')).toBe(false)
+    expect(await vault.exists('Cannon VTT/Resources/Lore/Factions.md')).toBe(true)
     // The next update refreshes the gear note again: its new text is now the recorded one.
     await ensureResources(vault, v2.map((f) => ({ ...f, content: f.content.replace('Prices updated.', 'Prices v3.') })))
     expect(await readFile(gear, 'utf8')).toContain('Prices v3.')
@@ -74,24 +74,24 @@ describe('shared Resources folder', () => {
   it('moves an older vault over without touching edited or deleted notes', async () => {
     await ensureResources(vault)
     // The marker used to be prose, with no hashes.
-    await writeFile(join(dir, 'DND Tavern', '.resources-created'), 'Remembers that DND Tavern already set up the Resources folder in this vault.\n')
-    const creatures = join(dir, 'DND Tavern', 'Resources', 'Lore', 'Creatures.md')
+    await writeFile(join(dir, 'Cannon VTT', '.resources-created'), 'Remembers that Cannon VTT already set up the Resources folder in this vault.\n')
+    const creatures = join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Creatures.md')
     await writeFile(creatures, '---\ntype: lorebook\n---\nEdited.\n')
-    await rm(join(dir, 'DND Tavern', 'Resources', 'Lore', 'Townsfolk.md'))
+    await rm(join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Townsfolk.md'))
     await ensureResources(vault)
     const v2 = starterFiles().map((f) => ({ ...f, content: `${f.content}\nNew line.\n` }))
     await ensureResources(vault, v2)
-    expect(await readFile(join(dir, 'DND Tavern', 'Resources', 'Lore', 'Gear and Prices.md'), 'utf8')).toContain('New line.')
+    expect(await readFile(join(dir, 'Cannon VTT', 'Resources', 'Lore', 'Gear and Prices.md'), 'utf8')).toContain('New line.')
     expect(await readFile(creatures, 'utf8')).not.toContain('New line.')
-    expect(await vault.exists('DND Tavern/Resources/Lore/Townsfolk.md')).toBe(false)
+    expect(await vault.exists('Cannon VTT/Resources/Lore/Townsfolk.md')).toBe(false)
   })
 
   it('lists shared images for the image choosers', async () => {
     await createResources(vault)
-    await writeFile(join(dir, 'DND Tavern', 'Resources', 'Images', 'Maps', 'harbour.png'), 'x')
-    await writeFile(join(dir, 'DND Tavern', 'Resources', 'Images', 'notes.txt'), 'x')
+    await writeFile(join(dir, 'Cannon VTT', 'Resources', 'Images', 'Maps', 'harbour.png'), 'x')
+    await writeFile(join(dir, 'Cannon VTT', 'Resources', 'Images', 'notes.txt'), 'x')
     const images = await resourceImages(vault, (n) => n.endsWith('.png'))
-    expect(images).toEqual(['DND Tavern/Resources/Images/Maps/harbour.png'])
+    expect(images).toEqual(['Cannon VTT/Resources/Images/Maps/harbour.png'])
   })
 
   it('lets a world opt out of the shared lore', () => {

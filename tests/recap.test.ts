@@ -5,7 +5,7 @@ import { PROMPT_BLOCK_IDS, type Message, type SessionSummary } from '../src/shar
 
 const msg = (id: string, role: Message['role'], extra: Partial<Message> = {}): Message => ({ id, role, text: `${role} ${id}`, swipes: [], swipeIndex: 0, createdAt: '', ...extra })
 
-const session = (path: string, created: string, campaignPath = 'DND Tavern/Campaigns/A'): SessionSummary => ({
+const session = (path: string, created: string, campaignPath = 'Cannon VTT/Campaigns/A'): SessionSummary => ({
   path,
   name: path.split('/').pop()!.replace(/\.md$/, ''),
   id: path,
@@ -35,13 +35,13 @@ describe('recap helpers', () => {
 
   it('finds earlier sessions of the same campaign, newest first', () => {
     const all = [
-      session('DND Tavern/Campaigns/A/Sessions/2026-10-01 Session 01.md', '2026-10-01T10:00:00.000Z'),
-      session('DND Tavern/Campaigns/A/Sessions/2026-10-03 Session 02.md', '2026-10-03T10:00:00.000Z'),
-      session('DND Tavern/Campaigns/B/Sessions/2026-10-04 Other.md', '2026-10-04T10:00:00.000Z', 'DND Tavern/Campaigns/B'),
-      session('DND Tavern/Campaigns/A/Sessions/2026-10-09 Session 04.md', '2026-10-09T10:00:00.000Z'),
-      session('DND Tavern/Campaigns/A/Sessions/2026-10-05 Session 03.md', '2026-10-05T10:00:00.000Z')
+      session('Cannon VTT/Campaigns/A/Sessions/2026-10-01 Session 01.md', '2026-10-01T10:00:00.000Z'),
+      session('Cannon VTT/Campaigns/A/Sessions/2026-10-03 Session 02.md', '2026-10-03T10:00:00.000Z'),
+      session('Cannon VTT/Campaigns/B/Sessions/2026-10-04 Other.md', '2026-10-04T10:00:00.000Z', 'Cannon VTT/Campaigns/B'),
+      session('Cannon VTT/Campaigns/A/Sessions/2026-10-09 Session 04.md', '2026-10-09T10:00:00.000Z'),
+      session('Cannon VTT/Campaigns/A/Sessions/2026-10-05 Session 03.md', '2026-10-05T10:00:00.000Z')
     ]
-    const current = { path: 'DND Tavern/Campaigns/A/Sessions/2026-10-05 Session 03.md', campaignPath: 'DND Tavern/Campaigns/A', created: '2026-10-05T10:00:00.000Z' }
+    const current = { path: 'Cannon VTT/Campaigns/A/Sessions/2026-10-05 Session 03.md', campaignPath: 'Cannon VTT/Campaigns/A', created: '2026-10-05T10:00:00.000Z' }
     expect(previousSessions(all, current).map((s) => s.title)).toEqual(['2026-10-03 Session 02', '2026-10-01 Session 01'])
   })
 

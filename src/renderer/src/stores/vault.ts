@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import type { CampaignSummary, VaultIndex } from '@shared/types'
 import { invoke, on } from '@/lib/ipc'
 
-const ACTIVE_CAMPAIGN_KEY = 'dnd-tavern:active-campaign'
+const ACTIVE_CAMPAIGN_KEY = 'cannon-vtt:active-campaign'
 
 function readStored(): string | null {
   try {

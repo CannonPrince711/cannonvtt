@@ -113,7 +113,7 @@ const COIN_NAMES = { pp: 'Platinum pieces', gp: 'Gold pieces', ep: 'Electrum pie
 export function SheetPanel(): React.JSX.Element {
   const path = useActiveCharacterPath()
   const { note, updateSheet } = useCharacterNote(path)
-  const rootFolder = useVault((s) => s.index?.rootFolder ?? 'DND Tavern')
+  const rootFolder = useVault((s) => s.index?.rootFolder ?? 'Cannon VTT')
   const hasSession = useChat((s) => !!s.session)
   const [amount, setAmount] = useState('')
   const [newItem, setNewItem] = useState('')

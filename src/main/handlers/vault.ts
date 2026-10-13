@@ -125,7 +125,7 @@ export function registerVaultHandlers(): void {
       const vault = vaultService.require()
       const ext = path.split('.').pop()?.toLowerCase() ?? ''
       if (!IMAGE_EXTENSIONS.includes(ext) || !vault.isInRoot(path)) {
-        throw new AppError('VAULT_PATH', 'Only images inside the DND Tavern folder can be read.')
+        throw new AppError('VAULT_PATH', 'Only images inside the Cannon VTT folder can be read.')
       }
       const data = await vault.readBinary(path)
       const mime = ext === 'jpg' ? 'image/jpeg' : `image/${ext}`

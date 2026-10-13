@@ -2,9 +2,9 @@
 type: session
 id: s-4162ea8f
 title: The Lantern Pier
-campaign: "[[DND Tavern/Campaigns/The Sunken Lantern/Campaign|The Sunken Lantern]]"
+campaign: "[[Cannon VTT/Campaigns/The Sunken Lantern/Campaign|The Sunken Lantern]]"
 characters:
-  - "[[DND Tavern/Characters/Aria|Aria Thornwood]]"
+  - "[[Cannon VTT/Characters/Aria|Aria Thornwood]]"
 persona: Aria Thornwood
 created: 2026-10-11T02:32:05.078Z
 updated: 2026-10-11T03:19:12.960Z
@@ -48,7 +48,7 @@ combat:
       initiative: 9
       conditions: []
       is_player: true
-      character: DND Tavern/Characters/Aria.md
+      character: Cannon VTT/Characters/Aria.md
     - id: ced03bd8a
       name: Goblin 1
       hp: 7

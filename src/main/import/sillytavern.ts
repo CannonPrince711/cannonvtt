@@ -9,7 +9,7 @@ export interface ParsedCard {
   card: CharacterCard
   /** Embedded `character_book`, converted to lorebook entries. */
   book: { name: string; entries: LoreEntry[] } | null
-  /** Card fields DND Tavern doesn't model, kept for re-export. */
+  /** Card fields Cannon VTT doesn't model, kept for re-export. */
   extras: Record<string, unknown>
 }
 

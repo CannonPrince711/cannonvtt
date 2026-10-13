@@ -19,7 +19,7 @@ describe('NPC trigger words', () => {
 
 describe('NPC notes as lore', () => {
   const ysolde = card({ name: 'Mother Ysolde', description: 'The last lantern-keeper of Saltmere.', personality: 'Calm, stubborn.', aliases: ['the keeper'] })
-  const body = '\n# Mother Ysolde\n\n*Keeper* in [[DND Tavern/Campaigns/Saltmere/Campaign|Saltmere]]\n\n- **Wants:** to silence the bell.\n- **Secret:** she was on duty the night Old Saltmere sank.\n'
+  const body = '\n# Mother Ysolde\n\n*Keeper* in [[Cannon VTT/Campaigns/Saltmere/Campaign|Saltmere]]\n\n- **Wants:** to silence the bell.\n- **Secret:** she was on duty the night Old Saltmere sank.\n'
 
   it('gives the DM the whole note as plain text', () => {
     const e = npcLoreEntry(ysolde, body)
@@ -66,18 +66,18 @@ describe('NPC notes as lore', () => {
 
 describe('which campaign an NPC belongs to', () => {
   const campaigns = [
-    { folder: 'DND Tavern/Campaigns/Saltmere', links: ['DND Tavern/NPCs/Corwin Hale.md'] },
-    { folder: 'DND Tavern/Campaigns/Ashen Crown', links: [] }
+    { folder: 'Cannon VTT/Campaigns/Saltmere', links: ['Cannon VTT/NPCs/Corwin Hale.md'] },
+    { folder: 'Cannon VTT/Campaigns/Ashen Crown', links: [] }
   ]
   it('ties NPCs to campaigns by links either way', () => {
     // The NPC links to a session in the campaign (the NPC generator's "First met").
-    expect(npcCampaigns('DND Tavern/NPCs/Ola.md', ['DND Tavern/Campaigns/Saltmere/Sessions/Session 01.md'], campaigns)).toEqual(['DND Tavern/Campaigns/Saltmere'])
+    expect(npcCampaigns('Cannon VTT/NPCs/Ola.md', ['Cannon VTT/Campaigns/Saltmere/Sessions/Session 01.md'], campaigns)).toEqual(['Cannon VTT/Campaigns/Saltmere'])
     // The campaign note links to the NPC.
-    expect(npcCampaigns('DND Tavern/NPCs/Corwin Hale.md', [], campaigns)).toEqual(['DND Tavern/Campaigns/Saltmere'])
+    expect(npcCampaigns('Cannon VTT/NPCs/Corwin Hale.md', [], campaigns)).toEqual(['Cannon VTT/Campaigns/Saltmere'])
   })
   it('lets NPCs tied to no campaign turn up anywhere', () => {
-    expect(npcBelongsTo('DND Tavern/Campaigns/Ashen Crown', npcCampaigns('DND Tavern/NPCs/Wanderer.md', [], campaigns))).toBe(true)
-    expect(npcBelongsTo('DND Tavern/Campaigns/Ashen Crown', ['DND Tavern/Campaigns/Saltmere'])).toBe(false)
+    expect(npcBelongsTo('Cannon VTT/Campaigns/Ashen Crown', npcCampaigns('Cannon VTT/NPCs/Wanderer.md', [], campaigns))).toBe(true)
+    expect(npcBelongsTo('Cannon VTT/Campaigns/Ashen Crown', ['Cannon VTT/Campaigns/Saltmere'])).toBe(false)
   })
 })
 
@@ -93,7 +93,7 @@ describe('aliases on a card', () => {
 
 describe('plain note text', () => {
   it('drops the title heading, embeds and bold, and shows links as their text', () => {
-    expect(plainNoteText('# Ola\n![[Ola.png]]\nMet in [[Sessions/Session 01|the first session]] at [[DND Tavern/Places/Forge.md]].\n**Bold**', 'Ola')).toBe(
+    expect(plainNoteText('# Ola\n![[Ola.png]]\nMet in [[Sessions/Session 01|the first session]] at [[Cannon VTT/Places/Forge.md]].\n**Bold**', 'Ola')).toBe(
       'Met in the first session at Forge.\nBold'
     )
   })

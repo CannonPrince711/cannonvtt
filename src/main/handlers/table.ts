@@ -16,7 +16,7 @@ function openPlayerScreen(): void {
   screen = new BrowserWindow({
     width: 1280,
     height: 800,
-    title: 'DND Tavern · Player screen',
+    title: 'Cannon VTT · Player screen',
     autoHideMenuBar: true,
     backgroundColor: '#121014',
     icon: join(__dirname, '../../resources/icon.png'),

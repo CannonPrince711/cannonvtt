@@ -15,8 +15,8 @@ import { ExtensionFrame } from './ExtensionFrame'
 import { useApp } from '@/stores/app'
 
 const PERMISSION_TEXT: Record<ExtensionPermission, { label: string; detail: string }> = {
-  'vault:read': { label: 'Read notes', detail: 'Read notes inside the DND Tavern folder of your vault.' },
-  'vault:write': { label: 'Write notes', detail: 'Create and change notes inside the DND Tavern folder.' },
+  'vault:read': { label: 'Read notes', detail: 'Read notes inside the Cannon VTT folder of your vault.' },
+  'vault:write': { label: 'Write notes', detail: 'Create and change notes inside the Cannon VTT folder.' },
   network: { label: 'Use the internet', detail: 'Make web requests to any address.' },
   'generate:text': { label: 'Generate text', detail: 'Send prompts to your text backend (may cost money).' },
   'generate:image': { label: 'Generate images', detail: 'Send prompts to your image backend.' }

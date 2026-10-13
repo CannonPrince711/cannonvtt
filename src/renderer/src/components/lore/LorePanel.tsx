@@ -16,7 +16,7 @@ import { toast } from '@/stores/toasts'
 import { useUi } from '@/stores/ui'
 import { useVault } from '@/stores/vault'
 
-/** "[[DND Tavern/Lorebooks/World|World]]" or "[[World]]" → matches a lorebook path? */
+/** "[[Cannon VTT/Lorebooks/World|World]]" or "[[World]]" → matches a lorebook path? */
 function linkMatches(link: string, path: string): boolean {
   const target = link.replace(/^\[\[|\]\]$/g, '').split('|')[0]!.replace(/\.md$/i, '').toLowerCase()
   const p = path.replace(/\.md$/i, '').toLowerCase()

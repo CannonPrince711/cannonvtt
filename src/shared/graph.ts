@@ -1,5 +1,5 @@
 /**
- * The note graph: DND Tavern notes as nodes, wikilinks between them as edges
+ * The note graph: Cannon VTT notes as nodes, wikilinks between them as edges
  * (resolved the way Obsidian does), plus "mention" edges where a session's
  * text names a character or NPC without linking it.
  */
@@ -89,7 +89,7 @@ export interface GraphInput {
   rootFolder: string
   /** Every Markdown file in the vault (for resolving links). */
   allPaths: string[]
-  /** Notes inside the DND Tavern folder, with their text. */
+  /** Notes inside the Cannon VTT folder, with their text. */
   files: { path: string; content: string }[]
   /** Display names by path (character names, session titles…). */
   labels: Map<string, string>

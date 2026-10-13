@@ -26,10 +26,10 @@ function createTray(): void {
   if (tray) return
   const image = nativeImage.createFromPath(iconPath()).resize({ width: 16, height: 16 })
   tray = new Tray(image)
-  tray.setToolTip('DND Tavern')
+  tray.setToolTip('Cannon VTT')
   tray.setContextMenu(
     Menu.buildFromTemplate([
-      { label: 'Show DND Tavern', click: showWindow },
+      { label: 'Show Cannon VTT', click: showWindow },
       { type: 'separator' },
       {
         label: 'Quit',

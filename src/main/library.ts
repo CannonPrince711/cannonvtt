@@ -54,7 +54,7 @@ export async function createCharacterFromCard(vault: Vault, card: CharacterNote[
   return readCharacter(vault, path)
 }
 
-/** Finds a character note from a wikilink ("[[Aria]]" or "[[DND Tavern/Characters/Aria|Aria]]"). */
+/** Finds a character note from a wikilink ("[[Aria]]" or "[[Cannon VTT/Characters/Aria|Aria]]"). */
 export async function resolveCharacterLink(vault: Vault, link: string): Promise<VaultPath | null> {
   const target = wikilinkTarget(link)
   if (!target) return null

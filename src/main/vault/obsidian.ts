@@ -66,7 +66,7 @@ export async function validateVault(path: string): Promise<VaultValidation> {
     /* plain folder */
   }
   // fs.access(W_OK) is unreliable for folders on Windows; try a real write.
-  const probe = join(path, `.dnd-tavern-probe-${randomBytes(4).toString('hex')}`)
+  const probe = join(path, `.cannon-vtt-probe-${randomBytes(4).toString('hex')}`)
   try {
     await fs.writeFile(probe, '')
     result.writable = true

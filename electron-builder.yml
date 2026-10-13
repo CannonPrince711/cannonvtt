@@ -1,6 +1,6 @@
-appId: com.dndtavern.app
-productName: DND Tavern
-copyright: Copyright © 2026 DND Tavern
+appId: com.cannonvtt.app
+productName: Cannon VTT
+copyright: Copyright © 2026 Cannon VTT
 directories:
   buildResources: build
   output: dist
@@ -15,7 +15,7 @@ extraResources:
     to: icon.png
 npmRebuild: false
 win:
-  executableName: DND Tavern
+  executableName: Cannon VTT
   icon: build/icon.ico
   target:
     - target: nsis
@@ -29,20 +29,20 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: always
   createStartMenuShortcut: true
-  shortcutName: DND Tavern
-  uninstallDisplayName: DND Tavern
+  shortcutName: Cannon VTT
+  uninstallDisplayName: Cannon VTT
   installerIcon: build/icon.ico
   uninstallerIcon: build/icon.ico
 portable:
   artifactName: ${productName} ${version}.${ext}
 # Linux: build on Linux (or WSL) with "npm run dist:linux".
 linux:
-  executableName: dnd-tavern
+  executableName: cannon-vtt
   icon: resources/icon.png
   category: Game
   synopsis: D&D chat frontend for LLMs that keeps everything in an Obsidian vault
-  maintainer: DND Tavern <noreply@users.noreply.github.com>
-  vendor: DND Tavern
+  maintainer: Cannon VTT <noreply@users.noreply.github.com>
+  vendor: Cannon VTT
   # Window association on GNOME/KDE: Electron's app_id comes from package.json desktopName.
   syncDesktopName: true
   target:
@@ -53,7 +53,7 @@ linux:
 appImage:
   artifactName: ${productName}-${version}-${arch}.${ext}
 deb:
-  artifactName: dnd-tavern_${version}_${arch}.${ext}
+  artifactName: cannon-vtt_${version}_${arch}.${ext}
   # electron-builder's defaults plus ALSA and GBM, which Electron loads at startup.
   depends: [libgtk-3-0, libnotify4, libnss3, libxss1, libxtst6, xdg-utils, libatspi2.0-0, libuuid1, libsecret-1-0, libasound2, libgbm1]
 # In-app updates read latest.yml (latest-linux.yml for the AppImage) from
@@ -62,5 +62,5 @@ deb:
 publish:
   provider: github
   owner: CannonPrince711
-  repo: cannontavern
+  repo: cannonvtt
   releaseType: release

@@ -122,7 +122,7 @@ export function ChatHeader({ character, onInspect }: { character: CharacterSumma
   )
 }
 
-/** Link target of a wikilink: "[[DND Tavern/NPCs/Alpha|Alpha]]" → "dnd tavern/npcs/alpha". */
+/** Link target of a wikilink: "[[Cannon VTT/NPCs/Alpha|Alpha]]" → "cannon vtt/npcs/alpha". */
 function linkKey(link: string): string {
   return (/^\[\[([^\]|#]+)/.exec(link)?.[1] ?? link).replace(/\.md$/i, '').trim().toLowerCase()
 }

@@ -44,8 +44,8 @@ export function buildOpenAiRequest(b: ResolvedTextBackend, p: TextPrompt, stream
   const headers: Record<string, string> = { 'Content-Type': 'application/json' }
   if (b.key) headers.Authorization = `Bearer ${b.key}`
   if (host.endsWith('openrouter.ai')) {
-    headers['HTTP-Referer'] = 'https://github.com/dnd-tavern'
-    headers['X-Title'] = 'DND Tavern'
+    headers['HTTP-Referer'] = 'https://github.com/cannon-vtt'
+    headers['X-Title'] = 'Cannon VTT'
   }
   return {
     url: `${base}/chat/completions`,

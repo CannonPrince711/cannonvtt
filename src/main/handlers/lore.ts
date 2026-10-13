@@ -38,7 +38,7 @@ export function registerLoreHandlers(): void {
     'lorebooks:save',
     async (_e, book, force) => {
       const vault = vaultService.require()
-      if (!vault.isInRoot(book.path)) throw new AppError('VAULT_READONLY', 'Lorebooks live in the DND Tavern folder.')
+      if (!vault.isInRoot(book.path)) throw new AppError('VAULT_READONLY', 'Lorebooks live in the Cannon VTT folder.')
       const saved = await saveLorebook(vault, book, force === true)
       await vaultService.reindex(saved.path)
       return saved

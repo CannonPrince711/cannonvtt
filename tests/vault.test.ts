@@ -11,19 +11,19 @@ let vault: Vault
 beforeEach(async () => {
   dir = await mkdtemp(join(tmpdir(), 'dnd-vault-'))
   await mkdir(join(dir, '.obsidian'))
-  vault = new Vault({ vaultPath: dir, rootFolder: 'DND Tavern' })
+  vault = new Vault({ vaultPath: dir, rootFolder: 'Cannon VTT' })
 })
 
 afterEach(async () => {
   await rm(dir, { recursive: true, force: true })
 })
 
-const note = 'DND Tavern/Characters/Aria.md'
+const note = 'Cannon VTT/Characters/Aria.md'
 
 describe('Vault paths', () => {
   it('never resolves outside the vault or into .obsidian', () => {
     expect(() => vault.resolve('../outside.md')).toThrow()
-    expect(() => vault.resolve('DND Tavern/../../x.md')).toThrow()
+    expect(() => vault.resolve('Cannon VTT/../../x.md')).toThrow()
     expect(() => vault.resolve('.obsidian/app.json')).toThrow(/never reads or writes/)
     expect(vault.resolve('Notes/a.md')).toBe(join(dir, 'Notes', 'a.md'))
   })
@@ -33,7 +33,7 @@ describe('Vault paths', () => {
   })
 
   it('maps absolute paths back, hiding .obsidian', () => {
-    expect(vault.toVaultPath(join(dir, 'DND Tavern', 'a.md'))).toBe('DND Tavern/a.md')
+    expect(vault.toVaultPath(join(dir, 'Cannon VTT', 'a.md'))).toBe('Cannon VTT/a.md')
     expect(vault.toVaultPath(join(dir, '.obsidian', 'app.json'))).toBeNull()
     expect(vault.toVaultPath(join(dir, '..', 'x'))).toBeNull()
   })
@@ -42,7 +42,7 @@ describe('Vault paths', () => {
 describe('Vault conflict check', () => {
   it('creates a new file when baseHash is null', async () => {
     await vault.write(note, 'one', { baseHash: null })
-    expect(await readFile(join(dir, 'DND Tavern', 'Characters', 'Aria.md'), 'utf8')).toBe('one')
+    expect(await readFile(join(dir, 'Cannon VTT', 'Characters', 'Aria.md'), 'utf8')).toBe('one')
   })
 
   it('refuses to create over an existing file when baseHash is null', async () => {
@@ -74,7 +74,7 @@ describe('Vault conflict check', () => {
   })
 
   it('refuses to overwrite a file it has never seen unless forced', async () => {
-    await mkdir(join(dir, 'DND Tavern', 'Characters'), { recursive: true })
+    await mkdir(join(dir, 'Cannon VTT', 'Characters'), { recursive: true })
     await writeFile(vault.resolve(note), 'pre-existing')
     await expect(vault.write(note, 'x')).rejects.toBeInstanceOf(VaultConflictError)
     await vault.write(note, 'x', { force: true })
@@ -117,8 +117,8 @@ describe('Vault own-write tracking', () => {
   })
 
   it('counts a file added elsewhere as new even if it was read before the event arrived', async () => {
-    await mkdir(join(dir, 'DND Tavern', 'Characters'), { recursive: true })
-    await writeFile(join(dir, 'DND Tavern', 'Characters', 'Aria.md'), 'from obsidian')
+    await mkdir(join(dir, 'Cannon VTT', 'Characters'), { recursive: true })
+    await writeFile(join(dir, 'Cannon VTT', 'Characters', 'Aria.md'), 'from obsidian')
     await vault.read(note)
     expect(vault.isOwnChange(note, 'from obsidian')).toBe(true)
     expect(vault.isOwnChange(note, 'from obsidian', { added: true })).toBe(false)
@@ -126,7 +126,7 @@ describe('Vault own-write tracking', () => {
 
   it('reports app writes and whether they created the file', async () => {
     const seen: [string, boolean][] = []
-    const v = new Vault({ vaultPath: dir, rootFolder: 'DND Tavern', onWrite: (p, _c, created) => seen.push([p, created]) })
+    const v = new Vault({ vaultPath: dir, rootFolder: 'Cannon VTT', onWrite: (p, _c, created) => seen.push([p, created]) })
     await v.write(note, 'one', { baseHash: null })
     await v.write(note, 'two')
     expect(seen).toEqual([[note, true], [note, false]])
@@ -135,17 +135,17 @@ describe('Vault own-write tracking', () => {
 
 describe('Vault helpers', () => {
   it('finds a free file name', async () => {
-    await vault.write('DND Tavern/NPCs/Bob.md', 'x', { baseHash: null })
-    await vault.write('DND Tavern/NPCs/Bob 2.md', 'x', { baseHash: null })
-    expect(await vault.uniquePath('DND Tavern/NPCs', 'Bob', '.md')).toBe('DND Tavern/NPCs/Bob 3.md')
+    await vault.write('Cannon VTT/NPCs/Bob.md', 'x', { baseHash: null })
+    await vault.write('Cannon VTT/NPCs/Bob 2.md', 'x', { baseHash: null })
+    expect(await vault.uniquePath('Cannon VTT/NPCs', 'Bob', '.md')).toBe('Cannon VTT/NPCs/Bob 3.md')
   })
 
   it('lists and walks, skipping dot-folders', async () => {
-    await vault.write('DND Tavern/a.md', 'x', { baseHash: null })
-    await vault.write('DND Tavern/sub/b.md', 'x', { baseHash: null })
-    await mkdir(join(dir, 'DND Tavern', '.trash'))
-    await writeFile(join(dir, 'DND Tavern', '.trash', 'c.md'), 'x')
-    expect((await vault.walk('DND Tavern')).sort()).toEqual(['DND Tavern/a.md', 'DND Tavern/sub/b.md'])
+    await vault.write('Cannon VTT/a.md', 'x', { baseHash: null })
+    await vault.write('Cannon VTT/sub/b.md', 'x', { baseHash: null })
+    await mkdir(join(dir, 'Cannon VTT', '.trash'))
+    await writeFile(join(dir, 'Cannon VTT', '.trash', 'c.md'), 'x')
+    expect((await vault.walk('Cannon VTT')).sort()).toEqual(['Cannon VTT/a.md', 'Cannon VTT/sub/b.md'])
     expect(await vault.walkVault()).not.toContain('.obsidian/app.json')
   })
 })
@@ -157,16 +157,16 @@ describe('VaultIndexer', () => {
       '---\nname: Aria the Grey\navatar: aria.png\ntags: [elf]\ndnd:\n  class: Ranger\n  level: 3\n  hp: 20\n  max_hp: 24\n---\n',
       { baseHash: null }
     )
-    await vault.write('DND Tavern/Campaigns/Lantern/Campaign.md', '---\nname: The Sunken Lantern\n---\n', {
+    await vault.write('Cannon VTT/Campaigns/Lantern/Campaign.md', '---\nname: The Sunken Lantern\n---\n', {
       baseHash: null
     })
     await vault.write(
-      'DND Tavern/Campaigns/Lantern/Sessions/2026-10-10 Session 01.md',
+      'Cannon VTT/Campaigns/Lantern/Sessions/2026-10-10 Session 01.md',
       '---\ntype: session\nid: s1\ntitle: Arrival\ncreated: 2026-10-10T10:00:00Z\n---\n> [!dm]\n> Hello\n\n> [!player] Aria\n> Hi\n',
       { baseHash: null }
     )
-    await vault.write('DND Tavern/Campaigns/Orphan/Sessions/x.md', '> [!dm]\n> x\n', { baseHash: null })
-    await vault.write('DND Tavern/Lorebooks/World.md', '## Dragons\nkeys:: dragon\n\n## Elves\n', { baseHash: null })
+    await vault.write('Cannon VTT/Campaigns/Orphan/Sessions/x.md', '> [!dm]\n> x\n', { baseHash: null })
+    await vault.write('Cannon VTT/Lorebooks/World.md', '## Dragons\nkeys:: dragon\n\n## Elves\n', { baseHash: null })
 
     const indexer = new VaultIndexer(vault, { vaultName: 'Test', isObsidianVault: true })
     await indexer.build()
@@ -175,7 +175,7 @@ describe('VaultIndexer', () => {
     expect(index.characters).toHaveLength(1)
     expect(index.characters[0]).toMatchObject({
       displayName: 'Aria the Grey',
-      avatar: 'DND Tavern/Characters/avatars/aria.png',
+      avatar: 'Cannon VTT/Characters/avatars/aria.png',
       class: 'Ranger',
       level: 3,
       hp: 20,
@@ -187,7 +187,7 @@ describe('VaultIndexer', () => {
       ['The Sunken Lantern', 1]
     ])
     const s = index.sessions.find((x) => x.id === 's1')!
-    expect(s).toMatchObject({ title: 'Arrival', messageCount: 2, campaignPath: 'DND Tavern/Campaigns/Lantern' })
+    expect(s).toMatchObject({ title: 'Arrival', messageCount: 2, campaignPath: 'Cannon VTT/Campaigns/Lantern' })
     expect(index.lorebooks[0]?.entryCount).toBe(2)
 
     // Incremental update and removal.

@@ -49,7 +49,7 @@ function useTable(code: string, name: string | null) {
     if (!name || !code) return
     let closed = false
     let timer: ReturnType<typeof setTimeout> | undefined
-    const tokenKey = `dnd-tavern-token:${code.toUpperCase()}`
+    const tokenKey = `cannon-vtt-token:${code.toUpperCase()}`
     const connect = (): void => {
       setPhase((p) => (p === 'open' ? 'closed' : 'connecting'))
       const socket = new WebSocket(WS_URL)
@@ -459,7 +459,7 @@ function Party({ state, compact }: { state: TableState; compact?: boolean }): Re
 // ── App ─────────────────────────────────────────────────────────────────────
 
 function Join({ code, onJoin }: { code: string; onJoin: (name: string, code: string) => void }): React.JSX.Element {
-  const [name, setName] = useState(storage('local')?.getItem('dnd-tavern-player-name') ?? '')
+  const [name, setName] = useState(storage('local')?.getItem('cannon-vtt-player-name') ?? '')
   const [c, setC] = useState(code)
   return (
     <div className="grid min-h-full place-items-center p-6">
@@ -495,7 +495,7 @@ export function PlayerApp(): React.JSX.Element {
   const [tab, setTab] = useState<'story' | 'me' | 'party'>('story')
 
   useEffect(() => {
-    document.title = state?.campaignName ? `${state.campaignName} · DND Tavern` : 'DND Tavern · Player'
+    document.title = state?.campaignName ? `${state.campaignName} · Cannon VTT` : 'Cannon VTT · Player'
   }, [state?.campaignName])
 
   if (!name) {
@@ -503,7 +503,7 @@ export function PlayerApp(): React.JSX.Element {
       <Join
         code={code}
         onJoin={(n, c) => {
-          storage('local')?.setItem('dnd-tavern-player-name', n)
+          storage('local')?.setItem('cannon-vtt-player-name', n)
           setCode(c)
           setName(n)
         }}
@@ -543,7 +543,7 @@ export function PlayerApp(): React.JSX.Element {
 
   const header = (
     <header className="flex shrink-0 items-center gap-3 border-b bg-titlebar px-4 py-2.5">
-      <span className="font-display text-sm font-semibold tracking-[0.12em] text-gold">DND TAVERN</span>
+      <span className="font-display text-sm font-semibold tracking-[0.12em] text-gold">CANNON VTT</span>
       <span className="min-w-0 truncate text-xs text-muted-foreground">
         {[state.campaignName, state.sessionTitle].filter(Boolean).join(' · ') || 'Waiting for the host'}
       </span>

@@ -7,7 +7,7 @@ import { readJson, writeFileAtomic } from '../src/main/atomic'
 let dir: string
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), 'dnd-tavern-'))
+  dir = await mkdtemp(join(tmpdir(), 'cannon-vtt-'))
 })
 
 afterEach(async () => {

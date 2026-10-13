@@ -1,6 +1,6 @@
 # Architecture
 
-DND Tavern is an Electron app with three processes' worth of code and one
+Cannon VTT is an Electron app with three processes' worth of code and one
 source of truth: the Obsidian vault.
 
 - **Main** (`src/main/`): everything with system access: vault I/O and the
@@ -16,7 +16,7 @@ source of truth: the Obsidian vault.
 ## File tree
 
 ```
-cannontavern/
+cannonvtt/
 ├─ electron.vite.config.ts          builds main, preload, renderer (main bundles its deps)
 ├─ electron-builder.yml             NSIS installer + portable exe; ships extensions/ and the tray icon
 ├─ vitest.config.ts

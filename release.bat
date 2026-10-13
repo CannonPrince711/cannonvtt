@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 rem ---------------------------------------------------------------------------
-rem  DND Tavern release: builds the installers and publishes them to GitHub
+rem  Cannon VTT release: builds the installers and publishes them to GitHub
 rem  Releases, so installed copies can update themselves.
 rem
 rem  Usage:  release.bat [version] [--dry]
@@ -13,7 +13,7 @@ rem  ("gh auth login"), else a hidden prompt. It is never saved.
 rem ---------------------------------------------------------------------------
 
 cd /d "%~dp0"
-title DND Tavern release
+title Cannon VTT release
 
 where node >nul 2>nul || (echo Node.js was not found. Install Node.js 22 or newer. & goto :fail)
 where npm >nul 2>nul || (echo npm was not found. Install Node.js 22 or newer. & goto :fail)
@@ -30,7 +30,7 @@ for %%A in (%*) do (
 
 for /f "usebackq delims=" %%V in (`node -p "require('./package.json').version"`) do set "CURVER=%%V"
 echo.
-echo  DND Tavern release
+echo  Cannon VTT release
 echo  Current version: %CURVER%
 if defined DRY echo  Dry run: nothing will be published.
 echo.
@@ -54,7 +54,7 @@ if not defined GH_TOKEN (
 )
 if not defined GH_TOKEN (echo No GitHub token, so nothing can be published. & goto :fail)
 
-echo Publishing DND Tavern v%VERSION% to GitHub Releases...
+echo Publishing Cannon VTT v%VERSION% to GitHub Releases...
 echo.
 
 :build
@@ -66,7 +66,7 @@ if defined DRY (
   echo  Built v%VERSION% in the dist folder. Nothing was published.
 ) else (
   echo  Published v%VERSION%:
-  echo    https://github.com/CannonPrince711/cannontavern/releases
+  echo    https://github.com/CannonPrince711/cannonvtt/releases
   echo.
   echo  Installed copies find it with Settings - General - Updates - Check now.
   echo  The repository is private: make its releases public, or updates can't download.

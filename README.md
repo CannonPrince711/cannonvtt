@@ -1,8 +1,8 @@
-# DND Tavern
+# Cannon VTT
 
 A desktop app for Windows and Linux for playing Dungeons & Dragons with an AI Dungeon Master, in the style of SillyTavern.
 
-Everything it creates is stored as plain Markdown and image files in an **Obsidian vault**: characters, sheets, lorebooks, campaigns, session logs and illustrations. You can read and edit the same notes in Obsidian while you play, and DND Tavern picks up your edits live.
+Everything it creates is stored as plain Markdown and image files in an **Obsidian vault**: characters, sheets, lorebooks, campaigns, session logs and illustrations. You can read and edit the same notes in Obsidian while you play, and Cannon VTT picks up your edits live.
 
 - **Any text model.** OpenAI-compatible servers (OpenRouter, LM Studio, llama.cpp, vLLM, Groq and others), Anthropic Claude, Ollama, KoboldCpp, text-generation-webui, or any HTTP API through a body template. Local, LAN or remote, with an optional fallback chain.
 - **Any image backend.** ComfyUI with your own workflows (fully supported, including remote servers behind a proxy), Automatic1111/Forge, OpenAI images, or a custom API.
@@ -39,8 +39,8 @@ Download one of these from the Releases page:
 
 | File | Use it when |
 | --- | --- |
-| `DND Tavern Setup <version>.exe` | You want a normal install with Start menu and desktop shortcuts. It installs per user, so no admin rights are needed. |
-| `DND Tavern <version>.exe` | You want a portable app that runs from any folder or a USB stick. |
+| `Cannon VTT Setup <version>.exe` | You want a normal install with Start menu and desktop shortcuts. It installs per user, so no admin rights are needed. |
+| `Cannon VTT <version>.exe` | You want a portable app that runs from any folder or a USB stick. |
 
 The builds are not code-signed, so Windows SmartScreen may say *"Windows protected your PC"* the first time. Click **More info → Run anyway**. See [Code signing](#code-signing) if you build and distribute it yourself.
 
@@ -52,30 +52,30 @@ Two builds for x64 Linux (Ubuntu 22.04 or newer, Debian 12, Fedora and others):
 
 | File | Use it when |
 | --- | --- |
-| `DND Tavern-<version>-x86_64.AppImage` | Any distribution. Runs without installing and updates itself. |
-| `dnd-tavern_<version>_amd64.deb` | Ubuntu or Debian, with a menu entry. Updates come as a new `.deb`. |
+| `Cannon VTT-<version>-x86_64.AppImage` | Any distribution. Runs without installing and updates itself. |
+| `cannon-vtt_<version>_amd64.deb` | Ubuntu or Debian, with a menu entry. Updates come as a new `.deb`. |
 
 ```bash
-chmod +x "DND Tavern-0.2.0-x86_64.AppImage"
+chmod +x "Cannon VTT-0.2.0-x86_64.AppImage"
 ```
 
 ```bash
-./"DND Tavern-0.2.0-x86_64.AppImage"
+./"Cannon VTT-0.2.0-x86_64.AppImage"
 ```
 
 AppImages need FUSE 2. Ubuntu 24.04 and later don't include it: `sudo apt install libfuse2t64` (on 22.04, `libfuse2`). For the `.deb`:
 
 ```bash
-sudo apt install ./dnd-tavern_0.2.0_amd64.deb
+sudo apt install ./cannon-vtt_0.2.0_amd64.deb
 ```
 
-API keys are encrypted with the desktop keyring (GNOME Keyring or KWallet), which GNOME and KDE run by default. Without a keyring (some minimal window managers, or WSL), keys can't be stored; type `env:NAME` in the key field to read the key from an environment variable instead. Settings live in `~/.config/DND Tavern/`. Obsidian is found whether it was installed natively, as a Flatpak or as a Snap.
+API keys are encrypted with the desktop keyring (GNOME Keyring or KWallet), which GNOME and KDE run by default. Without a keyring (some minimal window managers, or WSL), keys can't be stored; type `env:NAME` in the key field to read the key from an environment variable instead. Settings live in `~/.config/Cannon VTT/`. Obsidian is found whether it was installed natively, as a Flatpak or as a Snap.
 
 ## First run
 
 A short setup wizard walks you through:
 
-1. **Vault.** Pick an Obsidian vault. DND Tavern lists the vaults Obsidian knows about, or you can browse to any folder; it doesn't have to be an Obsidian vault yet. All of its files go in one folder inside the vault, `DND Tavern/` by default.
+1. **Vault.** Pick an Obsidian vault. Cannon VTT lists the vaults Obsidian knows about, or you can browse to any folder; it doesn't have to be an Obsidian vault yet. All of its files go in one folder inside the vault, `Cannon VTT/` by default.
 2. **Text model.** Choose a preset, enter the URL and key, and press **Test**. You can skip this and add one later.
 3. **Images and character** (optional). Set up an image backend, create a character, or import SillyTavern character cards (PNG or JSON).
 4. **Finish.** Leave **Start with "The Sunken Lantern"** ticked to get a ready-to-play sample: a short mystery campaign with a lorebook, an NPC, a level 2 rogue with a full sheet, and a first session waiting for your move.
@@ -86,7 +86,7 @@ Press **Ctrl+K** at any time to search commands, sessions, characters, lorebooks
 
 ```text
 <your vault>/
-└── DND Tavern/
+└── Cannon VTT/
     ├── Characters/            one note per character (card + D&D sheet in frontmatter)
     │   └── avatars/
     ├── NPCs/
@@ -111,7 +111,7 @@ Session notes are readable in Obsidian. Each message is a callout:
 
 You can edit, add or delete messages in Obsidian; the app keeps the rest of the file exactly as you left it. Alternative replies ("swipes"), the rolling summary, the session recap and the combat tracker are stored in the note's frontmatter.
 
-How DND Tavern treats your files:
+How Cannon VTT treats your files:
 
 - It only ever writes inside its root folder, and never touches `.obsidian/`.
 - Every write is atomic (written to a temporary file and then renamed). If a note changed on disk since it was read, the app merges or asks; it never silently overwrites your edits.
@@ -218,7 +218,7 @@ In the map's image chooser, **Paint from a sketch…** turns a rough drawing (co
 
 Open a session, then the right panel's **Table** tab:
 
-1. Choose **Local network & online** (phones and laptops on your Wi-Fi, or anyone you share it with through port forwarding or Tailscale) or **This PC only**, and press **Start hosting**. Windows may ask to let DND Tavern use the network; allow it for private networks.
+1. Choose **Local network & online** (phones and laptops on your Wi-Fi, or anyone you share it with through port forwarding or Tailscale) or **This PC only**, and press **Start hosting**. Windows may ask to let Cannon VTT use the network; allow it for private networks.
 2. Share the link shown (the join code is in it). Players open it in any browser, enter their name, and pick a character, which joins the session's party.
 3. Players read the story as it's written, act as their character, and roll their checks and dice from their page (rolls happen on the host). When the DM asks for a check, players get a **Roll it** button.
 
@@ -246,7 +246,7 @@ Add as many as you like in **Settings → Text backends**. One is the default. O
 | text-generation-webui | Native API |
 | Custom | Any HTTP API: a JSON body template with `{{prompt}}`, `{{messages}}`, `{{system}}` and so on, plus a JSONPath to the reply (and optionally to each streamed chunk) |
 
-**Context size** is how much text DND Tavern plans to send. Self-hosted servers fix their own window when they start (KoboldCpp's `--contextsize` defaults to 4096), so the app asks KoboldCpp, llama.cpp and vLLM what they actually loaded and never plans for more. **Test** shows that number, warns when your setting is bigger, and can set it for you. To get a bigger window, restart the server with a larger setting (for KoboldCpp, `--contextsize 8192` or more; models trained on 4k, like Llama 2, get less coherent well past 8k). Ollama loads whatever Context size you set.
+**Context size** is how much text Cannon VTT plans to send. Self-hosted servers fix their own window when they start (KoboldCpp's `--contextsize` defaults to 4096), so the app asks KoboldCpp, llama.cpp and vLLM what they actually loaded and never plans for more. **Test** shows that number, warns when your setting is bigger, and can set it for you. To get a bigger window, restart the server with a larger setting (for KoboldCpp, `--contextsize 8192` or more; models trained on 4k, like Llama 2, get less coherent well past 8k). Ollama loads whatever Context size you set.
 
 Every backend has a **Network** section for custom headers, an HTTP/HTTPS/SOCKS5 proxy, a timeout, retries, and an option to accept self-signed certificates. Plain `http://` to a non-local address shows a warning, because your prompts and key travel unencrypted.
 
@@ -265,7 +265,7 @@ Every backend has a **Network** section for custom headers, an HTTP/HTTPS/SOCKS5
 ### Example: Ollama on another PC over Tailscale
 
 1. On the PC running Ollama, make it listen on all interfaces: set the environment variable `OLLAMA_HOST=0.0.0.0` and restart Ollama.
-2. In DND Tavern, choose the **Ollama** preset and set the URL to that machine's Tailscale name, e.g. `http://gaming-pc.tail1234.ts.net:11434`.
+2. In Cannon VTT, choose the **Ollama** preset and set the URL to that machine's Tailscale name, e.g. `http://gaming-pc.tail1234.ts.net:11434`.
 3. Press **Fetch models**, pick one, then **Test**.
 
 Tailscale encrypts the connection, so the plain-`http` warning can be ignored here.
@@ -288,12 +288,12 @@ Header values are stored encrypted, like API keys.
 ### ComfyUI
 
 1. In ComfyUI, enable **Dev mode** in the settings, then use **Workflow → Export (API)** to save your workflow as API-format JSON.
-2. In DND Tavern, add a ComfyUI backend (`http://127.0.0.1:8188` by default) and click **Import workflow**.
-3. DND Tavern guesses which nodes hold the positive and negative prompt, seed, size, steps, checkpoint and LoRA. Check the mapping and fix anything it got wrong. Each mapping is a node id and an input name, and you can also inject values into any other input.
+2. In Cannon VTT, add a ComfyUI backend (`http://127.0.0.1:8188` by default) and click **Import workflow**.
+3. Cannon VTT guesses which nodes hold the positive and negative prompt, seed, size, steps, checkpoint and LoRA. Check the mapping and fix anything it got wrong. Each mapping is a node id and an input name, and you can also inject values into any other input.
 4. Optionally mark a workflow as the default for scenes or portraits, choose random or fixed seeds, and override the checkpoint or LoRA (and its strength).
 5. Press **Test**. Progress streams over ComfyUI's websocket (falling back to polling) and can be cancelled.
 
-Workflows that take an input image (img2img, IP-Adapter) are supported: the reference image is uploaded to ComfyUI first. Workflows are stored in the app's data folder (`%APPDATA%\DND Tavern\workflows\`, or `~/.config/DND Tavern/workflows/` on Linux) by default, or in the vault if you prefer.
+Workflows that take an input image (img2img, IP-Adapter) are supported: the reference image is uploaded to ComfyUI first. Workflows are stored in the app's data folder (`%APPDATA%\Cannon VTT\workflows\`, or `~/.config/Cannon VTT/workflows/` on Linux) by default, or in the vault if you prefer.
 
 #### Remote ComfyUI behind a reverse proxy
 
@@ -309,7 +309,7 @@ The **OpenAI images** backend works with `gpt-image-1` and compatible servers. *
 
 ## Memory: summaries and session recaps
 
-A long campaign doesn't fit in a model's context, so DND Tavern compresses old material in three ways:
+A long campaign doesn't fit in a model's context, so Cannon VTT compresses old material in three ways:
 
 - **Rolling summary (within a session).** Every N messages (**Settings → Prompt**, 20 by default), older messages are folded into a running "story so far" stored in the session's frontmatter. The newest messages are always sent in full.
 - **Session recaps (between sessions).** When you leave a session (switch to another one, start a new one, or close the app and come back later), its whole chat is compressed into a recap: what happened, open threads, and where things stand. The recap is saved in the session note's frontmatter (`recap:`), and a toast confirms it. New sessions in the same campaign include the last few recaps (3 by default) as a **Previous sessions** block in the prompt, and show the latest one in a **Previously** card at the top of the chat. Recaps are only redone when the session has new messages. Type `/compress` to make one immediately. Turn the feature off with **Settings → Prompt → Compress finished sessions**.
@@ -322,10 +322,10 @@ The prompt is assembled from blocks you can reorder and switch off in **Settings
 
 ## Settings, keys and privacy
 
-- Settings live in `%APPDATA%\DND Tavern\settings.json` (Linux: `~/.config/DND Tavern/settings.json`). Your vault holds your content; nothing else is written there.
+- Settings live in `%APPDATA%\Cannon VTT\settings.json` (Linux: `~/.config/Cannon VTT/settings.json`). Your vault holds your content; nothing else is written there.
 - API keys and secret headers are encrypted with Windows DPAPI, or the desktop keyring on Linux (Electron `safeStorage`), so they can only be decrypted by your account on this computer. Instead of storing a key, you can enter `env:NAME` to read it from an environment variable at request time.
 - Keys never reach the app's UI process, and they are redacted from logs, error messages and the prompt inspector.
-- DND Tavern makes no network requests except to the backends you configure, the update check if you turn it on, and the multiplayer server while you host.
+- Cannon VTT makes no network requests except to the backends you configure, the update check if you turn it on, and the multiplayer server while you host.
 - **Minimise to tray** keeps the app in the notification area when you close the window. Quit from the tray icon's menu.
 
 ## Updates
@@ -334,7 +334,7 @@ Settings → **Updates**: one **Update** button checks GitHub, downloads the new
 
 ## Writing extensions
 
-Extensions are folders in `%APPDATA%\DND Tavern\extensions\` (Linux: `~/.config/DND Tavern/extensions/`; open it from **Settings → Extensions**). Six examples are installed: Weather & Time, Loot Generator, NPC Generator, Session Recap, Map Pins, and **Mature Mode (18+)**, which (once enabled and confirmed 18+) allows adult content between consenting adult characters and tracks its own per-character stat blocks such as Arousal, Affection and Stamina, updated by the model and editable in its panel. New extensions start disabled; enabling one shows the permissions it asks for, and you can grant or refuse each one.
+Extensions are folders in `%APPDATA%\Cannon VTT\extensions\` (Linux: `~/.config/Cannon VTT/extensions/`; open it from **Settings → Extensions**). Six examples are installed: Weather & Time, Loot Generator, NPC Generator, Session Recap, Map Pins, and **Mature Mode (18+)**, which (once enabled and confirmed 18+) allows adult content between consenting adult characters and tracks its own per-character stat blocks such as Arousal, Affection and Stamina, updated by the model and editable in its panel. New extensions start disabled; enabling one shows the permissions it asks for, and you can grant or refuse each one.
 
 ```text
 extensions/my-extension/
@@ -357,7 +357,7 @@ extensions/my-extension/
 }
 ```
 
-Permissions: `vault:read`, `vault:write` (only inside the DND Tavern folder), `network`, `generate:text`, `generate:image`.
+Permissions: `vault:read`, `vault:write` (only inside the Cannon VTT folder), `network`, `generate:text`, `generate:image`.
 
 ### main.js
 
@@ -436,7 +436,7 @@ npm run typecheck
 
 npm 11 blocks dependency install scripts by default. The ones this project needs are already approved in `package.json` (`allowScripts`). Electron downloads its binary the first time it runs.
 
-Dev runs keep their data in `%APPDATA%\DND Tavern (dev)\` (Linux: `~/.config/DND Tavern (dev)/`), so they never interfere with an installed copy.
+Dev runs keep their data in `%APPDATA%\Cannon VTT (dev)\` (Linux: `~/.config/Cannon VTT (dev)/`), so they never interfere with an installed copy.
 
 `TestVault/` is a small Obsidian vault for trying things out: point the wizard at it.
 
@@ -459,14 +459,14 @@ npm run dist
 
 This type-checks, builds, and writes both installers to `dist/`:
 
-- `dist/DND Tavern Setup <version>.exe` (NSIS installer)
-- `dist/DND Tavern <version>.exe` (portable)
+- `dist/Cannon VTT Setup <version>.exe` (NSIS installer)
+- `dist/Cannon VTT <version>.exe` (portable)
 
 `npm run dist:dir` builds an unpacked app in `dist/win-unpacked/` for quick testing. Regenerate the icon from `build/icon.svg` with `npm run icon`.
 
 ### Building for Linux
 
-Build on Linux, or in WSL on Windows (Ubuntu under WSL 2 works, and WSLg can run the result). Use Node.js 22 or newer, and clone the repository inside the Linux file system (for example `~/cannontavern`), not under `/mnt/c`, so `npm ci` installs Linux binaries:
+Build on Linux, or in WSL on Windows (Ubuntu under WSL 2 works, and WSLg can run the result). Use Node.js 22 or newer, and clone the repository inside the Linux file system (for example `~/cannonvtt`), not under `/mnt/c`, so `npm ci` installs Linux binaries:
 
 ```bash
 npm ci
@@ -476,7 +476,7 @@ npm ci
 npm run dist:linux
 ```
 
-This writes `dist/DND Tavern-<version>-x86_64.AppImage`, `dist/dnd-tavern_<version>_amd64.deb` and `dist/latest-linux.yml`. Building needs no extra packages (electron-builder downloads its own tools). Running the app needs the usual Electron libraries, which desktop installs already have; `sudo apt install ./dnd-tavern_<version>_amd64.deb` pulls in any that are missing (on a bare WSL install too).
+This writes `dist/Cannon VTT-<version>-x86_64.AppImage`, `dist/cannon-vtt_<version>_amd64.deb` and `dist/latest-linux.yml`. Building needs no extra packages (electron-builder downloads its own tools). Running the app needs the usual Electron libraries, which desktop installs already have; `sudo apt install ./cannon-vtt_<version>_amd64.deb` pulls in any that are missing (on a bare WSL install too).
 
 ### Publishing a release (for in-app updates)
 

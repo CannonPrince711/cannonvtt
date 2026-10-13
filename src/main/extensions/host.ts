@@ -258,7 +258,7 @@ class ExtensionHost {
     const clean = joinVaultPath(rel)
     const path = clean.toLowerCase().startsWith(`${vault.rootFolder.toLowerCase()}/`) ? clean : vault.rootPath(clean)
     if (!path.toLowerCase().endsWith('.md')) throw new Error('Extensions can only read and write .md notes.')
-    if (!vault.isInRoot(path)) throw new Error('Extensions can only use notes inside the DND Tavern folder.')
+    if (!vault.isInRoot(path)) throw new Error('Extensions can only use notes inside the Cannon VTT folder.')
     vault.resolve(path) // rejects traversal and .obsidian
     return path
   }

@@ -48,7 +48,7 @@ export function TitleBar(): React.JSX.Element {
       <div className="flex items-center gap-2">
         <Logo className="size-[18px] text-gold" />
         <span className="font-display text-[13px] font-semibold tracking-[0.12em] text-foreground">
-          DND TAVERN
+          CANNON VTT
         </span>
       </div>
 
